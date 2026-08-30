@@ -1,4 +1,13 @@
-# Herstar — B2B landing page prototype
+# Herstar website prototypes
+
+This repository now contains two standalone, English-language landing pages:
+
+- `b2b/` — overseas manufacturing and capabilities story
+- `b2c/` — bright consumer standing-desk and movement story
+
+The B2C landing page is available locally at **http://localhost:8787/b2c/**.
+
+## B2B prototype
 
 A static design prototype for the overseas B2B site of **Suzhou Herstar / 苏州市恒升机械有限公司**.
 Its job is to settle the visual direction and the scroll narrative before any of it is rebuilt

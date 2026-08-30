@@ -1,4 +1,4 @@
-name: Deploy B2B site to GitHub Pages
+name: Deploy Herstar sites to GitHub Pages
 
 on:
   push:
@@ -30,10 +30,16 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload B2B site
+      - name: Assemble B2B and B2C sites
+        run: |
+          mkdir -p _site/b2c
+          cp -R b2b/. _site/
+          cp -R b2c/. _site/b2c/
+
+      - name: Upload Herstar sites
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./b2b
+          path: ./_site
 
       - name: Deploy
         id: deployment
