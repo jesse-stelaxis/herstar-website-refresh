@@ -31,6 +31,7 @@ function requestDocument(id) {
 }
 function guide() {
   const items = [
+    ['00','内部 AI 经营助手','跨系统问数与定时简报','operations/index.html#assistant','查询 MES、SAP ERP、WMS、PLM 和采集记录，查看生产大屏，模拟报告推送到飞书或企业应用。'],
     ['01','制造与产品','从制造依据到产品初筛','index.html','保留工厂叙事与拆解展示；可搜索、筛选、比较桌架。'],
     ['02','按市场组织采购','买家用熟悉的语言提出需求','us.html','美国页可切换单位，德国页将技术资料和样品讨论带入询价。'],
     ['03','资料与样品','把采购需要的证据提出来','portal.html#resources','查看资料状态、下载选型清单、把资料请求加入询价。'],
@@ -47,7 +48,7 @@ function offers() {
   return `<section class="section"><span class="eyebrow">${t('Sourcing programmes','采购项目')}</span><h1>${t('Start at the right stage.','从适合的阶段开始。')}</h1><p class="muted">${t('Choose a sample discussion or an OEM project review. Fees, minimum quantities and delivery dates are confirmed after technical review.','选择样品沟通或 OEM 项目评估。费用、起订量和交期在技术评估后确认。')}</p><div class="split"><article class="feature offer-sample"><span class="meta">01 / SAMPLE</span><h2>${t('Evaluate before scaling.','先评估，再扩大。')}</h2><p>${t('Select one frame and prepare a sample request with your finish and application requirements.','选择一款桌架，提交颜色和应用需求，开始样品沟通。')}</p><form id="programme-form"><input type="hidden" name="programme" value="sample"><label>${t('Starting frame','备选桌架')}<select name="product">${products.map(p=>`<option value="${p.id}">${pn(p)}</option>`).join('')}</select></label><button class="primary">${t('Prepare sample request →','准备样品申请 →')}</button></form></article><article class="feature"><span class="meta">02 / OEM</span><h2>${t('Build a project brief.','整理完整的项目需求。')}</h2><p>${t('Bring together required load, travel, trial quantity and the evidence your team needs.','集中说明需求承重、行程、试单数量及团队需要的资料。')}</p><div class="actions"><a class="btn" href="us.html">United States ↗</a><a class="btn" href="de.html">Deutschland ↗</a></div><p class="notice">${t('No automatic discount, free sample or delivery promise is attached to these demo programmes.','演示项目不包含自动折扣、免费样品或交付承诺。')}</p></article></div></section>`;
 }
 function adminNav() {
-  return `<div class="workspace-nav" aria-label="工作台导航">${[['admin','询盘'],['admin/pipeline','销售阶段'],['admin/samples','样品'],['admin/analytics','分析'],['guide','演示导览']].map(([r,n])=>link(r,n,route()===r?'current':'')).join('')}</div>`;
+  return `<div class="workspace-nav" aria-label="工作台导航"><a href="operations/index.html#assistant">内部 AI 经营助手 ↗</a>${[['admin','询盘'],['admin/pipeline','销售阶段'],['admin/samples','样品'],['admin/analytics','分析'],['guide','演示导览']].map(([r,n])=>link(r,n,route()===r?'current':'')).join('')}</div>`;
 }
 function visibleLeads() {
   return leads.filter(l=>(boardFilter==='all'||l.status===boardFilter)&&(sourceFilter==='all'||l.source===sourceFilter)&&[l.company,l.name,l.email,l.owner,l.id].some(v=>String(v||'').toLowerCase().includes(leadSearch.toLowerCase())));

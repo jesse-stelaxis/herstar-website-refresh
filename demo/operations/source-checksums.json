@@ -1,0 +1,13 @@
+{
+  "factory-demo/index.html": "5464455c2bac26d195d686b5af401a9846e5276ed702ee8c98ef4b7e5fb26b96",
+  "factory-demo/.DS_Store": "85bfc1269c5ae3d47f2b3c8d2e27f8b296085c6d31546495aeeec7c45307837f",
+  "factory-demo/chat.mjs": "386806ac4ec348e0d345080bf51d3520aa45663979ccfb71a624cfe118583080",
+  "factory-demo/README.md": "f082bd8488af3973f6c3346c76cf3ed498cfc491428650b481152bbe5ac35281",
+  "factory-demo/style.css": "f3e7d59715d80b6282880cc4caa251371249ab27a674c7ead6e9a6b15c7ce5db",
+  "factory-demo/business.css": "41a82ffee3cd98eac4b2fab75eeab3358efe34938a451bcdd730fb4b5ed76d4b",
+  "factory-demo/app.js": "660ed222efbe7868cc491f341981256aadafd0e9e903742bdf94ac84106f1ec8",
+  "factory-demo/model.mjs": "5f772841030584d9a739c182dac8609401bf0bfcadb5a1462244b6e1c5f4c5df",
+  "factory-demo/tests/model.test.mjs": "afd8414f4df40f8dfd4d250a5dabb663376761ef33b5f534b898b2d08d2e5585",
+  "factory-demo/tests/chat.test.mjs": "bb2b361fc14df202c9dd1e3d8166b9e8f04e473ec61d854032ec1775fec799d2",
+  "factory-demo/tests/browser-check.mjs": "94d1e5b43f09f777d5a6c4577cb1d89ca38494c4dde08b6ffa48fb71022815eb"
+}

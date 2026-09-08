@@ -51,3 +51,7 @@ These are isolated JavaScript workflow tests with DOM stubs, not browser visual 
 `dummy-data.js` loads eight fictional customer records, saved quotations, follow-up drafts, sample progress, a scripted chat and sample analytics on first use. All contacts use example.com. The one-time seed preserves subsequent edits and existing local records. Chat responses are scripted; saving a chat creates a fictional lead with its transcript. Analytics can separate fixture data from local demonstration actions.
 
 Run `node demo/tests/dummy-data.cjs` to verify fixtures and safe reloading.
+
+## Internal operations assistant
+
+The chat entry now opens `operations/index.html#assistant`, an administrator-facing operations demo. It covers simulated MES, SAP ERP, WMS, PLM and equipment records, a factory display, source-referenced answers and scheduled-report/delivery simulations. The old buyer chat is no longer the displayed chat entry. See `operations/README.md` for the exact demo/production boundary.

@@ -32,12 +32,14 @@ jobs:
 
       - name: Assemble B2B, B2C and client demo
         run: |
-          mkdir -p _site/b2c _site/demo
+          mkdir -p _site/b2c _site/demo _site/demo/operations
           cp -R b2b/. _site/
           cp -R b2c/. _site/b2c/
           cp demo/*.html demo/*.css demo/*.js _site/demo/
           cp -R demo/assets demo/vendor _site/demo/
           cp demo/功能交付清单.md _site/demo/
+          cp demo/operations/*.html demo/operations/*.css demo/operations/*.js demo/operations/*.mjs _site/demo/operations/
+          cp demo/operations/README.md _site/demo/operations/
           cp 客户价值与设计说明.md 流量采购待办计划.md _site/
           find _site -name .DS_Store -delete
 
