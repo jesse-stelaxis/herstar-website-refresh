@@ -30,11 +30,16 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Assemble B2B and B2C sites
+      - name: Assemble B2B, B2C and client demo
         run: |
-          mkdir -p _site/b2c
+          mkdir -p _site/b2c _site/demo
           cp -R b2b/. _site/
           cp -R b2c/. _site/b2c/
+          cp demo/*.html demo/*.css demo/*.js _site/demo/
+          cp -R demo/assets demo/vendor _site/demo/
+          cp demo/功能交付清单.md _site/demo/
+          cp 客户价值与设计说明.md 流量采购待办计划.md _site/
+          find _site -name .DS_Store -delete
 
       - name: Upload Herstar sites
         uses: actions/upload-pages-artifact@v4

@@ -1,0 +1,12 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
+const store=new Map(),ctx={window:{},localStorage:{getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)},Date};
+vm.createContext(ctx);const code=fs.readFileSync('demo/dummy-data.js','utf8');vm.runInContext(code,ctx);
+let records=JSON.parse(store.get('herstar-leads'));
+assert.equal(records.length,8);assert.ok(records.every(r=>r.dummy&&r.email.endsWith('@example.com')));
+assert.equal(records.filter(r=>r.quotation).length,2);assert.equal(records.filter(r=>r.sample).length,2);
+assert.ok(new Set(records.map(r=>r.status)).size===5);
+assert.ok(JSON.parse(store.get('herstar-demo-events')).every(e=>e.dummy));
+records[0].owner='Edited demo owner';store.set('herstar-leads',JSON.stringify(records));vm.runInContext(code,ctx);
+assert.equal(JSON.parse(store.get('herstar-leads')).length,8);assert.equal(JSON.parse(store.get('herstar-leads'))[0].owner,'Edited demo owner');
+assert.equal(JSON.parse(store.get('herstar-chat-transcript')).length,2);
+console.log('PASS: fictional fixture coverage, reserved email domains, idempotent seeding, preserved edits and preloaded chat.');
