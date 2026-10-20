@@ -41,6 +41,9 @@ jobs:
           cp demo/operations/*.html demo/operations/*.css demo/operations/*.js demo/operations/*.mjs _site/demo/operations/
           cp demo/operations/README.md _site/demo/operations/
           cp 客户价值与设计说明.md 流量采购待办计划.md _site/
+          mkdir -p _site/fair
+          cp -R fair/. _site/fair/
+          rm -rf _site/fair/tools
           find _site -name .DS_Store -delete
 
       - name: Upload Herstar sites

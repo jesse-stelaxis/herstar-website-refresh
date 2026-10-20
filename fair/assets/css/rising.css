@@ -1,0 +1,190 @@
+/* ===========================================================================
+   THE RISING — hidden Halloween skin for the booth
+   Same night palette and three neons as the B2C campaign (b2c/assets/css/
+   halloween.css), so the two read as one campaign. Everything here is scoped
+   to body.rising: removing the class (rising.js does) restores daylight.
+   =========================================================================== */
+
+body.rising {
+  --night: #0b0710;
+  --crypt: #150f22;
+  --crypt-2: #1d1430;
+  --ember: #ff6a1f;
+  --toxic: #c8ff2e;
+  --seance: #a855ff;
+  --bone: #f3ece2;
+
+  /* daylight tokens re-pointed at the night */
+  --sun: var(--ember);
+  --sun-ink: #ffb183;
+  --gold: var(--toxic);
+  --ink: var(--bone);
+  --ink-2: #c3b6d6;
+  --muted: #a99cbb;
+  --paper: var(--night);
+  --line: rgba(243, 236, 226, .14);
+  --wash: rgba(14, 9, 22, .78);
+  --shadow: 0 0 34px rgba(255, 106, 31, .16), 0 24px 60px rgba(0, 0, 0, .55);
+  --cover-ground:
+    radial-gradient(90vw 70vh at 78% -10%, rgba(168, 85, 255, .28), transparent 62%),
+    radial-gradient(70vw 60vh at 4% 110%, rgba(255, 106, 31, .26), transparent 60%),
+    linear-gradient(180deg, #120a1d, #0b0710);
+  --ghost: transparent;
+  --mark: rgba(168, 85, 255, .2);
+  color-scheme: dark;
+  background: var(--night);
+  color: var(--bone);
+}
+body.rising .rising-only { display: revert; }
+body.rising .daylight-only { display: none; }
+body.rising ::selection { background: var(--ember); color: #150f22; }
+body.rising :focus-visible { outline-color: var(--toxic); }
+
+/* logos: the bone-ink variants keep the sun gradient and lose the black */
+body.rising .logo-hosun { content: url(../logos/hosun-light.svg); }
+body.rising .logo-herstar { content: url(../logos/herstar-light.svg); }
+
+/* neon primitives */
+.neon-ember { color: #fff5ee; text-shadow: 0 0 2px #fff, 0 0 10px rgba(255,106,31,.95), 0 0 28px rgba(255,106,31,.7), 0 0 62px rgba(255,106,31,.4); }
+.neon-toxic { color: #f8ffe8; text-shadow: 0 0 2px #fff, 0 0 10px rgba(200,255,46,.9), 0 0 28px rgba(200,255,46,.6), 0 0 62px rgba(200,255,46,.35); }
+.neon-seance { color: #f7efff; text-shadow: 0 0 2px #fff, 0 0 10px rgba(168,85,255,.95), 0 0 28px rgba(168,85,255,.7), 0 0 62px rgba(168,85,255,.4); }
+
+/* --- buttons --------------------------------------------------------------- */
+body.rising .button-primary { background: var(--ember); color: #1a0b03; box-shadow: 0 0 0 1px rgba(255,186,140,.55), 0 0 26px rgba(255,106,31,.5), 0 14px 34px rgba(0,0,0,.5); }
+body.rising .button-ghost { color: var(--bone); box-shadow: inset 0 0 0 2px rgba(200,255,46,.6), 0 0 18px rgba(200,255,46,.2); }
+body.rising .button-quiet { background: rgba(14, 9, 22, .8); color: var(--bone); box-shadow: inset 0 0 0 1px rgba(168,85,255,.4); }
+body.rising .pumpkin-switch { opacity: 1; }
+body.rising .pumpkin-shell, body.rising .pumpkin-rib, body.rising .pumpkin-stem { stroke: var(--ember); filter: drop-shadow(0 0 3px rgba(255,106,31,.9)); }
+body.rising .pumpkin-face { fill: var(--toxic); filter: drop-shadow(0 0 4px rgba(200,255,46,.95)); animation: lantern-flicker 3.4s ease-in-out infinite; }
+@keyframes lantern-flicker { 0%, 42%, 50%, 76%, 100% { opacity: 1; } 46% { opacity: .5; } 72% { opacity: .78; } }
+
+/* --- the reel -------------------------------------------------------------- */
+body.rising .reel { background: var(--night); }
+body.rising .scene { background: var(--cover-ground); }
+body.rising .reel-brand, body.rising .reel-chapter { border: 1px solid rgba(168, 85, 255, .3); }
+body.rising .reel-column { background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(200,255,46,.25); }
+body.rising .reel-column i { background: var(--toxic); box-shadow: 0 0 14px rgba(200,255,46,.9); }
+body.rising .scene-photo img, body.rising .scene-bg { filter: brightness(.5) contrast(1.12) saturate(.6) hue-rotate(-14deg); }
+body.rising .scene-photo::after { background: linear-gradient(0deg, rgba(11,7,16,.92), rgba(11,7,16,.1) 50%), radial-gradient(90vw 60vh at 80% 0%, rgba(168,85,255,.25), transparent 60%); }
+body.rising .caption-theme { color: var(--toxic); text-shadow: 0 0 12px rgba(200,255,46,.7); }
+body.rising .caption-text { color: #fff6ef; text-shadow: 0 0 26px rgba(255,106,31,.4), 0 0 70px rgba(168,85,255,.3); }
+body.rising .scene-slogan::before { background: linear-gradient(90deg, rgba(11,7,16,.96) 0%, rgba(11,7,16,.82) 46%, rgba(29,20,48,.45) 100%); }
+body.rising .slogan-en, body.rising .scene-cta h2, body.rising .scene-title h2 { color: #fff5ee; text-shadow: 0 0 2px #fff, 0 0 12px rgba(255,106,31,.9), 0 0 34px rgba(255,106,31,.55), 0 0 80px rgba(255,106,31,.3); }
+body.rising .slogan-zh, body.rising .scene-title h2 .zh { color: #eaffb4; text-shadow: 0 0 12px rgba(200,255,46,.7); }
+/* slogans switch on like a neon sign rather than rising */
+body.rising .scene.is-in .slogan-en, body.rising .scene.is-in .scene-cta h2 { animation: sign-on 1.3s steps(1, end) .5s both; }
+@keyframes sign-on { 0% { opacity: 0; } 18% { opacity: 1; } 26% { opacity: .15; } 34% { opacity: 1; } 42% { opacity: .3; } 50% { opacity: 1; } 58% { opacity: .55; } 66% { opacity: 1; } }
+
+/* cover: the ghost letters become an unlit neon outline */
+body.rising .cover-ghost { -webkit-text-stroke: 2px rgba(168, 85, 255, .35); filter: drop-shadow(0 0 12px rgba(168,85,255,.35)); }
+body.rising .cover-word, body.rising .cover-zh { color: #fff6ef; text-shadow: 0 0 26px rgba(255,106,31,.34), 0 0 70px rgba(168,85,255,.28); }
+body.rising .cover-names { color: #ffc9a6; border-color: var(--ember); box-shadow: 0 6px 14px -8px rgba(255,106,31,.9); }
+body.rising .cover-kicker { margin: 0 0 18px; font: 800 13px/1 var(--display); letter-spacing: .26em; text-transform: uppercase; color: #ffd0b2; }
+body.rising .cover-sign { margin: 0 0 6px; font: 800 clamp(64px, 9vw, 140px)/.9 var(--display); letter-spacing: -.04em; }
+body.rising .cover-lines li { color: #c3b6d6; }
+body.rising .cover-lines li .zh { color: var(--bone); }
+
+body.rising .stat, body.rising .badge, body.rising .logo-tile { border-color: rgba(255,106,31,.45); background: rgba(21, 15, 34, .82); }
+body.rising .stat { box-shadow: 0 -2px 18px -6px rgba(255,106,31,.8); }
+body.rising .stat-figure { color: #fff5ee; text-shadow: 0 0 2px #fff, 0 0 12px rgba(255,106,31,.9), 0 0 34px rgba(255,106,31,.5); }
+body.rising .logo-ink { background: #d9cbe9; }
+body.rising .year-line { border-color: var(--ember); box-shadow: 0 -4px 16px -6px rgba(255,106,31,.9); }
+body.rising .year-line b { color: #ffd0b2; text-shadow: 0 0 10px rgba(255,106,31,.7); }
+body.rising .year-line li:last-child b { color: var(--toxic); text-shadow: 0 0 12px rgba(200,255,46,.8); }
+
+/* product photography stays on lit white cards — "windows in a dark street" */
+body.rising .spot-image, body.rising .mosaic figure { background: #efe9df; box-shadow: 0 0 0 1px rgba(255,106,31,.35), 0 0 44px rgba(255,106,31,.22), 0 24px 60px rgba(0,0,0,.6); }
+body.rising .mosaic figcaption { color: #231c2b; }
+body.rising .spot-image.is-empty { background: linear-gradient(160deg, #1d1430, #0e0918); }
+body.rising .spot-placeholder svg { stroke: var(--toxic); filter: drop-shadow(0 0 8px rgba(200,255,46,.7)); }
+body.rising .spot-model { color: var(--toxic); }
+body.rising .spec-list b { color: #a99cbb; }
+body.rising .cert-fan img { box-shadow: 0 0 0 1px rgba(168,85,255,.5), 0 0 40px rgba(168,85,255,.3); filter: brightness(.88); }
+
+/* --- the site -------------------------------------------------------------- */
+body.rising .site-head { background: rgba(14, 9, 22, .86); border-bottom-color: rgba(168, 85, 255, .3); }
+body.rising .site-nav a:hover, body.rising .site-nav a.is-current { background: rgba(200,255,46,.12); color: var(--toxic); }
+body.rising .band-tint { background: linear-gradient(180deg, #150f22 0%, var(--night) 70%); }
+body.rising .band-dark { background: #080510; }
+body.rising .band-head h2 { color: #fbf6f0; }
+body.rising .eyebrow { color: #ffc9a6; }
+body.rising .stats .stat, body.rising .division, body.rising .factory, body.rising .cert, body.rising .feature, body.rising .contact-list {
+  background: linear-gradient(170deg, rgba(29, 20, 48, .92), rgba(16, 10, 26, .92));
+  border-color: rgba(255,106,31,.5);
+  box-shadow: 0 0 0 1px rgba(243,236,226,.08), 0 22px 60px rgba(0,0,0,.5);
+}
+body.rising .division { border-left-color: var(--ember); box-shadow: -6px 0 22px -10px rgba(255,106,31,.9), 0 22px 60px rgba(0,0,0,.5); }
+body.rising .division h3 { color: #ffd0b2; }
+body.rising .division .keywords { color: var(--toxic); }
+body.rising .feature-media { background: #efe9df; }
+body.rising .feature-media.is-empty { background: linear-gradient(160deg, #1d1430, #0e0918); }
+body.rising .chip { background: transparent; border-color: var(--line); color: #cfc3e0; }
+body.rising .chip[aria-pressed="true"], body.rising .chip:has(input:checked) { background: var(--toxic); border-color: var(--toxic); color: #141a04; box-shadow: 0 0 22px rgba(200,255,46,.45); }
+body.rising .chip[aria-pressed="true"] .zh, body.rising .chip:has(input:checked) .zh { color: #2f3a0a; }
+body.rising .product-card { background: #efe9df; color: #231c2b; box-shadow: 0 0 30px rgba(255,106,31,.10), 0 20px 50px rgba(0,0,0,.5); }
+body.rising .product-card:hover { box-shadow: 0 0 0 1px rgba(255,106,31,.5), 0 0 48px rgba(255,106,31,.34), 0 26px 60px rgba(0,0,0,.55); }
+body.rising .product-card .model { color: #c2511a; }
+body.rising .product-card .name-zh { color: #5f5767; }
+body.rising .cert-badge { background: linear-gradient(160deg, #1d1430, #120a1d); box-shadow: inset 0 0 0 1px rgba(168,85,255,.4); }
+body.rising .logos .logo-tile { background: rgba(21, 15, 34, .9); box-shadow: inset 0 0 0 1px rgba(243,236,226,.08); }
+body.rising .timeline li { border-top-color: var(--ember); }
+body.rising .campus img, body.rising .strip img, body.rising .factory img { filter: brightness(.7) saturate(.7) hue-rotate(-10deg); }
+body.rising .contact { background: var(--cover-ground); }
+body.rising .site-foot { background: #050308; border-top: 1px solid rgba(168,85,255,.25); }
+
+/* --- dialogs --------------------------------------------------------------- */
+body.rising dialog { color: var(--bone); }
+body.rising dialog::backdrop { background: rgba(5, 3, 9, .8); }
+body.rising .sheet, body.rising .lead, body.rising .idle-card { background: linear-gradient(170deg, #1d1430, #0e0918); border: 1px solid rgba(255,106,31,.35); box-shadow: 0 0 60px rgba(255,106,31,.18), 0 40px 110px rgba(0,0,0,.7); }
+body.rising .sheet-close { background: rgba(243,236,226,.1); color: var(--bone); }
+body.rising .gallery { background: #efe9df; }
+body.rising .gallery-thumbs button { background: #e2dace; }
+body.rising .lead-head { background: transparent; border-bottom: 1px solid rgba(255,106,31,.25); }
+body.rising .lead-head h2 { color: #fff6ef; text-shadow: 0 0 2px rgba(255,255,255,.6), 0 0 18px rgba(255,106,31,.7), 0 0 52px rgba(255,106,31,.4); }
+/* cobweb in the corner of the form — the one piece of literal decoration */
+body.rising .lead-head::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  opacity: .5;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 100% 0, transparent 34px, rgba(243,236,226,.45) 34px 35px, transparent 36px),
+    radial-gradient(circle at 100% 0, transparent 66px, rgba(243,236,226,.38) 66px 67px, transparent 68px),
+    radial-gradient(circle at 100% 0, transparent 102px, rgba(243,236,226,.3) 102px 103px, transparent 104px),
+    repeating-conic-gradient(from 182deg at 100% 0, rgba(243,236,226,.34) 0 .5deg, transparent .5deg 17.5deg);
+  -webkit-mask-image: radial-gradient(circle at 100% 0, #000 0 105px, transparent 106px);
+          mask-image: radial-gradient(circle at 100% 0, #000 0 105px, transparent 106px);
+}
+body.rising [dir="rtl"] .lead-head::after { right: auto; left: 0; transform: scaleX(-1); }
+body.rising .field input, body.rising .field select, body.rising .field textarea { background: rgba(255,255,255,.05); border-color: rgba(243,236,226,.2); color: var(--bone); }
+body.rising .field select option { background: #1d1430; }
+body.rising .field input:focus, body.rising .field select:focus, body.rising .field textarea:focus { border-color: var(--toxic); box-shadow: 0 0 0 3px rgba(200,255,46,.2); }
+body.rising .field [aria-invalid="true"] { border-color: #ff6a6a; background: rgba(255,80,80,.08); }
+body.rising .field .field-msg, body.rising .lead-error { color: #ffb3a1; }
+body.rising .lead-error { background: rgba(255,80,80,.12); }
+body.rising .consent { background: rgba(255,255,255,.05); }
+body.rising .consent input { accent-color: var(--toxic); }
+body.rising .lead-foot { background: linear-gradient(0deg, #0e0918 70%, rgba(14,9,24,0)); }
+body.rising .lead-thanks { background: transparent; }
+body.rising .lead-thanks h2 { color: #fff5ee; text-shadow: 0 0 12px rgba(255,106,31,.9), 0 0 40px rgba(255,106,31,.5); }
+body.rising .thanks-mark { stroke: var(--toxic); filter: drop-shadow(0 0 8px rgba(200,255,46,.8)); }
+body.rising .staff { color: var(--ink); }
+
+/* --- the wandering pumpkin is daylight-only; in the night it would be noise - */
+body.rising .wild-pumpkin { display: none; }
+
+/* --- the switch: lights cut, the sign flickers on --------------------------- */
+.curtain-sign { margin: 0; font: 800 clamp(64px, 12vw, 180px)/1 "Poppins", sans-serif; letter-spacing: -.04em; color: #fff5ee; opacity: 0; text-shadow: 0 0 2px #fff, 0 0 14px rgba(255,106,31,.95), 0 0 40px rgba(255,106,31,.7), 0 0 90px rgba(255,106,31,.45); }
+.curtain.is-on .curtain-sign { animation: sign-on 1.2s steps(1, end) .15s both; }
+.curtain.is-leaving { animation: curtain-out .55s ease-in both; }
+.curtain.is-dawn { background: #fff4e4; }
+.curtain.is-dawn .curtain-sign { color: #e2702f; text-shadow: none; animation: none; opacity: 1; }
+@keyframes curtain-out { to { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  body.rising .pumpkin-face, .curtain.is-on .curtain-sign, body.rising .scene.is-in .slogan-en { animation: none !important; opacity: 1; }
+}

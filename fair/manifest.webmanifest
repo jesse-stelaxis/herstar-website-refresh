@@ -1,0 +1,16 @@
+{
+  "name": "HOSUN · HERSTAR — Canton Fair",
+  "short_name": "HOSUN Fair",
+  "description": "Booth showcase and contact form for HOSUN and HERSTAR.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#f7e2c1",
+  "theme_color": "#f3c9a1",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

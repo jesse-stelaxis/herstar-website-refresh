@@ -1,0 +1,721 @@
+{
+ "version": "5f4a344e77d4",
+ "files": [
+  {
+   "url": "index.html",
+   "bytes": 17919
+  },
+  {
+   "url": "assets/css/fair.css",
+   "bytes": 42363
+  },
+  {
+   "url": "assets/css/fonts.css",
+   "bytes": 5789
+  },
+  {
+   "url": "assets/css/rising.css",
+   "bytes": 13994
+  },
+  {
+   "url": "assets/fonts/dmsans-latin-ext.woff2",
+   "bytes": 31312
+  },
+  {
+   "url": "assets/fonts/dmsans-latin.woff2",
+   "bytes": 62556
+  },
+  {
+   "url": "assets/fonts/poppins-300-latin-ext.woff2",
+   "bytes": 5540
+  },
+  {
+   "url": "assets/fonts/poppins-300-latin.woff2",
+   "bytes": 7844
+  },
+  {
+   "url": "assets/fonts/poppins-500-latin-ext.woff2",
+   "bytes": 5496
+  },
+  {
+   "url": "assets/fonts/poppins-500-latin.woff2",
+   "bytes": 7740
+  },
+  {
+   "url": "assets/fonts/poppins-600-latin-ext.woff2",
+   "bytes": 5552
+  },
+  {
+   "url": "assets/fonts/poppins-600-latin.woff2",
+   "bytes": 7992
+  },
+  {
+   "url": "assets/fonts/poppins-700-latin-ext.woff2",
+   "bytes": 5448
+  },
+  {
+   "url": "assets/fonts/poppins-700-latin.woff2",
+   "bytes": 7848
+  },
+  {
+   "url": "assets/fonts/poppins-800-latin-ext.woff2",
+   "bytes": 5484
+  },
+  {
+   "url": "assets/fonts/poppins-800-latin.woff2",
+   "bytes": 7816
+  },
+  {
+   "url": "assets/icons/icon-180.png",
+   "bytes": 5421
+  },
+  {
+   "url": "assets/icons/icon-192.png",
+   "bytes": 5801
+  },
+  {
+   "url": "assets/icons/icon-512.png",
+   "bytes": 15951
+  },
+  {
+   "url": "assets/img/cert/fcc-sdoc.webp",
+   "bytes": 171728
+  },
+  {
+   "url": "assets/img/cert/iatf-16949.webp",
+   "bytes": 56576
+  },
+  {
+   "url": "assets/img/cert/iso-13485.webp",
+   "bytes": 94106
+  },
+  {
+   "url": "assets/img/cert/iso-14001.webp",
+   "bytes": 45262
+  },
+  {
+   "url": "assets/img/cert/iso-9001.webp",
+   "bytes": 81214
+  },
+  {
+   "url": "assets/img/factory/assembly-1.webp",
+   "bytes": 97938
+  },
+  {
+   "url": "assets/img/factory/assembly-2.webp",
+   "bytes": 168580
+  },
+  {
+   "url": "assets/img/factory/assembly-3.webp",
+   "bytes": 154452
+  },
+  {
+   "url": "assets/img/factory/c-arm-line.webp",
+   "bytes": 161302
+  },
+  {
+   "url": "assets/img/factory/history-wall.webp",
+   "bytes": 95766
+  },
+  {
+   "url": "assets/img/factory/imaging-system.webp",
+   "bytes": 38746
+  },
+  {
+   "url": "assets/img/factory/lifting-columns.webp",
+   "bytes": 225736
+  },
+  {
+   "url": "assets/img/factory/machining.webp",
+   "bytes": 158004
+  },
+  {
+   "url": "assets/img/factory/new-campus-2.webp",
+   "bytes": 229446
+  },
+  {
+   "url": "assets/img/factory/new-campus-3.webp",
+   "bytes": 333726
+  },
+  {
+   "url": "assets/img/factory/new-campus.webp",
+   "bytes": 463192
+  },
+  {
+   "url": "assets/img/factory/painting-line.webp",
+   "bytes": 111648
+  },
+  {
+   "url": "assets/img/factory/painting.webp",
+   "bytes": 131886
+  },
+  {
+   "url": "assets/img/factory/partner-wall.webp",
+   "bytes": 85950
+  },
+  {
+   "url": "assets/img/factory/robot-arm-1.webp",
+   "bytes": 256320
+  },
+  {
+   "url": "assets/img/factory/robot-arm-2.webp",
+   "bytes": 84026
+  },
+  {
+   "url": "assets/img/factory/showroom-1.webp",
+   "bytes": 89856
+  },
+  {
+   "url": "assets/img/factory/showroom-2.webp",
+   "bytes": 126598
+  },
+  {
+   "url": "assets/img/factory/stamping-robot.webp",
+   "bytes": 157648
+  },
+  {
+   "url": "assets/img/factory/team.webp",
+   "bytes": 241858
+  },
+  {
+   "url": "assets/img/factory/welding-robot.webp",
+   "bytes": 292604
+  },
+  {
+   "url": "assets/img/factory/welding.webp",
+   "bytes": 56816
+  },
+  {
+   "url": "assets/img/film/accessible-kitchen.webp",
+   "bytes": 73876
+  },
+  {
+   "url": "assets/img/film/ankle-trainer.webp",
+   "bytes": 39524
+  },
+  {
+   "url": "assets/img/film/assembly.webp",
+   "bytes": 69556
+  },
+  {
+   "url": "assets/img/film/bed-studio-1.webp",
+   "bytes": 24512
+  },
+  {
+   "url": "assets/img/film/bed-studio-2.webp",
+   "bytes": 23006
+  },
+  {
+   "url": "assets/img/film/bed-studio-3.webp",
+   "bytes": 21848
+  },
+  {
+   "url": "assets/img/film/c-arm.webp",
+   "bytes": 51650
+  },
+  {
+   "url": "assets/img/film/home-care.webp",
+   "bytes": 61228
+  },
+  {
+   "url": "assets/img/film/precision.webp",
+   "bytes": 22018
+  },
+  {
+   "url": "assets/img/film/rnd.webp",
+   "bytes": 37824
+  },
+  {
+   "url": "assets/img/film/robot.webp",
+   "bytes": 37214
+  },
+  {
+   "url": "assets/img/film/sunrise.webp",
+   "bytes": 41068
+  },
+  {
+   "url": "assets/img/film/xray-detector.webp",
+   "bytes": 23386
+  },
+  {
+   "url": "assets/img/product/ankle-a.webp",
+   "bytes": 17194
+  },
+  {
+   "url": "assets/img/product/ankle-b.webp",
+   "bytes": 25364
+  },
+  {
+   "url": "assets/img/product/ankle-c.webp",
+   "bytes": 17666
+  },
+  {
+   "url": "assets/img/product/ankle-d.webp",
+   "bytes": 17202
+  },
+  {
+   "url": "assets/img/product/ankle-scene.webp",
+   "bytes": 40346
+  },
+  {
+   "url": "assets/img/product/basin-models.webp",
+   "bytes": 27214
+  },
+  {
+   "url": "assets/img/product/basin-scene.webp",
+   "bytes": 58066
+  },
+  {
+   "url": "assets/img/product/basin-views.webp",
+   "bytes": 35300
+  },
+  {
+   "url": "assets/img/product/bath-lift-a.webp",
+   "bytes": 20766
+  },
+  {
+   "url": "assets/img/product/bath-lift-b.webp",
+   "bytes": 16038
+  },
+  {
+   "url": "assets/img/product/bath-lift-c.webp",
+   "bytes": 19238
+  },
+  {
+   "url": "assets/img/product/bath-lift-views.webp",
+   "bytes": 35286
+  },
+  {
+   "url": "assets/img/product/cabinet-lift-glass.webp",
+   "bytes": 30320
+  },
+  {
+   "url": "assets/img/product/cabinet-lift-photo.webp",
+   "bytes": 38158
+  },
+  {
+   "url": "assets/img/product/cabinet-lift-spices.webp",
+   "bytes": 71000
+  },
+  {
+   "url": "assets/img/product/cabinet-lift.webp",
+   "bytes": 12276
+  },
+  {
+   "url": "assets/img/product/desk-coffee-views.webp",
+   "bytes": 25742
+  },
+  {
+   "url": "assets/img/product/desk-coffee.webp",
+   "bytes": 20460
+  },
+  {
+   "url": "assets/img/product/desk-executive.webp",
+   "bytes": 8066
+  },
+  {
+   "url": "assets/img/product/desk-four-leg-views.webp",
+   "bytes": 26330
+  },
+  {
+   "url": "assets/img/product/desk-four-leg.webp",
+   "bytes": 12682
+  },
+  {
+   "url": "assets/img/product/desk-gaming-views.webp",
+   "bytes": 39476
+  },
+  {
+   "url": "assets/img/product/desk-gaming.webp",
+   "bytes": 38050
+  },
+  {
+   "url": "assets/img/product/desk-health.webp",
+   "bytes": 67014
+  },
+  {
+   "url": "assets/img/product/desk-office-dual-b.webp",
+   "bytes": 42378
+  },
+  {
+   "url": "assets/img/product/desk-office-dual.webp",
+   "bytes": 24896
+  },
+  {
+   "url": "assets/img/product/desk-office-wood-views.webp",
+   "bytes": 31424
+  },
+  {
+   "url": "assets/img/product/desk-office-wood.webp",
+   "bytes": 19154
+  },
+  {
+   "url": "assets/img/product/desk-student-views.webp",
+   "bytes": 25560
+  },
+  {
+   "url": "assets/img/product/desk-student.webp",
+   "bytes": 19310
+  },
+  {
+   "url": "assets/img/product/em-2001-a.webp",
+   "bytes": 26960
+  },
+  {
+   "url": "assets/img/product/em-2001-b.webp",
+   "bytes": 28878
+  },
+  {
+   "url": "assets/img/product/em-2002-a.webp",
+   "bytes": 38478
+  },
+  {
+   "url": "assets/img/product/em-2002-b.webp",
+   "bytes": 33422
+  },
+  {
+   "url": "assets/img/product/em-3001-a.webp",
+   "bytes": 28562
+  },
+  {
+   "url": "assets/img/product/em-3001-b.webp",
+   "bytes": 32870
+  },
+  {
+   "url": "assets/img/product/em-3002-a.webp",
+   "bytes": 29028
+  },
+  {
+   "url": "assets/img/product/em-3002-b.webp",
+   "bytes": 24808
+  },
+  {
+   "url": "assets/img/product/em-3003-a.webp",
+   "bytes": 22258
+  },
+  {
+   "url": "assets/img/product/em-3003-b.webp",
+   "bytes": 27480
+  },
+  {
+   "url": "assets/img/product/em-5001-a.webp",
+   "bytes": 23698
+  },
+  {
+   "url": "assets/img/product/em-5001-b.webp",
+   "bytes": 32198
+  },
+  {
+   "url": "assets/img/product/em-5002-a.webp",
+   "bytes": 42690
+  },
+  {
+   "url": "assets/img/product/em-5002-b.webp",
+   "bytes": 38820
+  },
+  {
+   "url": "assets/img/product/hob-b.webp",
+   "bytes": 21390
+  },
+  {
+   "url": "assets/img/product/hob.webp",
+   "bytes": 14998
+  },
+  {
+   "url": "assets/img/product/hoist-b.webp",
+   "bytes": 34124
+  },
+  {
+   "url": "assets/img/product/hoist-room.webp",
+   "bytes": 56726
+  },
+  {
+   "url": "assets/img/product/hoist.webp",
+   "bytes": 23294
+  },
+  {
+   "url": "assets/img/product/rollator-b.webp",
+   "bytes": 38366
+  },
+  {
+   "url": "assets/img/product/rollator-dims.webp",
+   "bytes": 52990
+  },
+  {
+   "url": "assets/img/product/rollator-downhill.webp",
+   "bytes": 39468
+  },
+  {
+   "url": "assets/img/product/rollator-folded.webp",
+   "bytes": 41826
+  },
+  {
+   "url": "assets/img/product/rollator-seat.webp",
+   "bytes": 26392
+  },
+  {
+   "url": "assets/img/product/rollator-stop.webp",
+   "bytes": 41240
+  },
+  {
+   "url": "assets/img/product/rollator-straight.webp",
+   "bytes": 33338
+  },
+  {
+   "url": "assets/img/product/rollator-uphill.webp",
+   "bytes": 38376
+  },
+  {
+   "url": "assets/img/product/rollator.webp",
+   "bytes": 39522
+  },
+  {
+   "url": "assets/img/product/shower-chair-dims.webp",
+   "bytes": 34800
+  },
+  {
+   "url": "assets/img/product/shower-chair-scene.webp",
+   "bytes": 80464
+  },
+  {
+   "url": "assets/img/product/shower-chair.webp",
+   "bytes": 24828
+  },
+  {
+   "url": "assets/img/product/sink-kitchen.webp",
+   "bytes": 23760
+  },
+  {
+   "url": "assets/img/product/sink.webp",
+   "bytes": 14338
+  },
+  {
+   "url": "assets/img/product/table-angled.webp",
+   "bytes": 9214
+  },
+  {
+   "url": "assets/img/product/table-overbed.webp",
+   "bytes": 9336
+  },
+  {
+   "url": "assets/img/product/table-pneumatic.webp",
+   "bytes": 8366
+  },
+  {
+   "url": "assets/img/product/table-side-round.webp",
+   "bytes": 8804
+  },
+  {
+   "url": "assets/img/product/table-side.webp",
+   "bytes": 6164
+  },
+  {
+   "url": "assets/img/product/table-tilting-views.webp",
+   "bytes": 27454
+  },
+  {
+   "url": "assets/img/product/table-tilting.webp",
+   "bytes": 16858
+  },
+  {
+   "url": "assets/img/product/toilet-lift-b.webp",
+   "bytes": 16210
+  },
+  {
+   "url": "assets/img/product/toilet-lift.webp",
+   "bytes": 27916
+  },
+  {
+   "url": "assets/img/product/transfer-device-b.webp",
+   "bytes": 27366
+  },
+  {
+   "url": "assets/img/product/transfer-device-views.webp",
+   "bytes": 42010
+  },
+  {
+   "url": "assets/img/product/transfer-device.webp",
+   "bytes": 52186
+  },
+  {
+   "url": "assets/img/product/wardrobe-rail.webp",
+   "bytes": 7808
+  },
+  {
+   "url": "assets/img/product/wardrobe-scene-1.webp",
+   "bytes": 35240
+  },
+  {
+   "url": "assets/img/product/wardrobe-scene-2.webp",
+   "bytes": 23340
+  },
+  {
+   "url": "assets/img/product/wheel-washer-b.webp",
+   "bytes": 98208
+  },
+  {
+   "url": "assets/img/product/wheel-washer-c.webp",
+   "bytes": 154440
+  },
+  {
+   "url": "assets/img/product/wheel-washer.webp",
+   "bytes": 52508
+  },
+  {
+   "url": "assets/js/app.js",
+   "bytes": 6455
+  },
+  {
+   "url": "assets/js/content.js",
+   "bytes": 29658
+  },
+  {
+   "url": "assets/js/db.js",
+   "bytes": 1422
+  },
+  {
+   "url": "assets/js/form-i18n.js",
+   "bytes": 33772
+  },
+  {
+   "url": "assets/js/leads.js",
+   "bytes": 13413
+  },
+  {
+   "url": "assets/js/offline.js",
+   "bytes": 4892
+  },
+  {
+   "url": "assets/js/rising.js",
+   "bytes": 3593
+  },
+  {
+   "url": "assets/js/settings.js",
+   "bytes": 1525
+  },
+  {
+   "url": "assets/js/showreel.js",
+   "bytes": 11455
+  },
+  {
+   "url": "assets/js/site.js",
+   "bytes": 10623
+  },
+  {
+   "url": "assets/js/staff.js",
+   "bytes": 13471
+  },
+  {
+   "url": "assets/logos/arjo.png",
+   "bytes": 11585
+  },
+  {
+   "url": "assets/logos/barco.png",
+   "bytes": 19936
+  },
+  {
+   "url": "assets/logos/bmw.png",
+   "bytes": 8755
+  },
+  {
+   "url": "assets/logos/carestream.png",
+   "bytes": 5370
+  },
+  {
+   "url": "assets/logos/daikin.png",
+   "bytes": 13438
+  },
+  {
+   "url": "assets/logos/dewertokin.png",
+   "bytes": 8416
+  },
+  {
+   "url": "assets/logos/genertec.png",
+   "bytes": 32827
+  },
+  {
+   "url": "assets/logos/herstar-light.svg",
+   "bytes": 273829
+  },
+  {
+   "url": "assets/logos/herstar.svg",
+   "bytes": 279299
+  },
+  {
+   "url": "assets/logos/hosun-light.svg",
+   "bytes": 192633
+  },
+  {
+   "url": "assets/logos/hosun-mark-light.svg",
+   "bytes": 192633
+  },
+  {
+   "url": "assets/logos/hosun-mark.svg",
+   "bytes": 193881
+  },
+  {
+   "url": "assets/logos/hosun.svg",
+   "bytes": 193881
+  },
+  {
+   "url": "assets/logos/hubei-health.png",
+   "bytes": 6130
+  },
+  {
+   "url": "assets/logos/kessebohmer.png",
+   "bytes": 8106
+  },
+  {
+   "url": "assets/logos/linak.png",
+   "bytes": 6094
+  },
+  {
+   "url": "assets/logos/maquet.png",
+   "bytes": 12599
+  },
+  {
+   "url": "assets/logos/paramount-bed.png",
+   "bytes": 14060
+  },
+  {
+   "url": "assets/logos/philips.png",
+   "bytes": 6413
+  },
+  {
+   "url": "assets/logos/siemens.png",
+   "bytes": 3145
+  },
+  {
+   "url": "assets/logos/suzhou-health.png",
+   "bytes": 24633
+  },
+  {
+   "url": "assets/logos/taikang.png",
+   "bytes": 18569
+  },
+  {
+   "url": "assets/logos/toyota.png",
+   "bytes": 6356
+  },
+  {
+   "url": "assets/logos/viessmann.png",
+   "bytes": 12124
+  },
+  {
+   "url": "assets/logos/vishee.png",
+   "bytes": 14231
+  },
+  {
+   "url": "assets/logos/zf.png",
+   "bytes": 19305
+  },
+  {
+   "url": "manifest.webmanifest",
+   "bytes": 599
+  },
+  {
+   "url": "assets/video/film-1080.mp4",
+   "bytes": 43910165
+  }
+ ]
+}

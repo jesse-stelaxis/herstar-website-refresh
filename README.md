@@ -7,6 +7,9 @@ This repository now contains two standalone, English-language landing pages:
 
 The B2C landing page is available locally at **http://localhost:8787/b2c/**.
 
+- `fair/` — offline-first Canton Fair booth tablet: showreel, explorable site, multilingual lead form,
+  hidden Halloween skin. See **`fair/README.md`**.
+
 ## B2B prototype
 
 A static design prototype for the overseas B2B site of **Suzhou Herstar / 苏州市恒升机械有限公司**.
