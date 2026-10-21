@@ -2,86 +2,122 @@
 // content.js and runs the product and certificate sheets.
 
 import {
-  COMPANY, STATS, STORY, DIVISIONS, FACTORIES, MILESTONES, CERTIFICATES, OTHER_SYSTEMS, PARTNERS, PARTNER_LABELS,
-  CATEGORIES, PRODUCTS, FILM, img,
+  COMPANY, STATS, ABOUT, CORE_BUSINESS, PHILOSOPHY, FACTORIES, MILESTONES, CERTIFICATES, WELDING, PARTNERS,
+  CATEGORIES, PRODUCTS, FILM, img, en, zh,
 } from './content.js';
-import { certIsCurrent } from './showreel.js';
+import { esc, bi, specItems, partnerTile, certIsCurrent } from './ui.js';
 import { localUrl } from './offline.js';
 
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const slot = (name) => document.querySelector(`[data-render="${name}"]`);
 const byId = Object.fromEntries(PRODUCTS.map((p) => [p.id, p]));
 const isCutout = (id) => id.startsWith('product/');
 
 const STRIP = [
-  ['factory/welding-robot', 'Robotic welding'], ['factory/machining', 'CNC machining'], ['factory/robot-arm-2', 'Automated handling'],
-  ['factory/painting', 'Coating'], ['factory/assembly-1', 'Assembly'], ['factory/assembly-3', 'Final assembly and testing'],
-  ['factory/lifting-columns', 'Lifting columns'], ['film/rnd', 'R&D team'], ['factory/showroom-1', 'Showroom'],
-  ['factory/partner-wall', 'Partner wall'], ['factory/team', 'The Herstar team'], ['factory/new-campus-2', 'New campus plan'],
+  ['factory/welding-robot', 'Robotic welding', '机器人焊接'],
+  ['factory/machining', 'Machining', '机加工'],
+  ['factory/robot-arm-2', 'Automated handling', '自动化上下料'],
+  ['factory/painting-line', 'Automated spraying line', '自动喷涂线'],
+  ['factory/assembly-1', 'Assembly', '装配'],
+  ['factory/assembly-2', 'Assembly line', '装配线'],
+  ['factory/assembly-3', 'Final assembly and testing', '总装与检测'],
+  ['film/rnd', 'R&D team', '研发团队'],
+  ['factory/showroom-1', 'Showroom', '展厅'],
+  ['factory/partner-wall', 'Partner wall', '合作伙伴墙'],
 ];
 
+const productCard = (p) => `
+  <button class="product-card" type="button" data-product="${p.id}" data-cat="${p.cat}">
+    <span class="thumb"><img${p.sceneThumb || !p.images[0].startsWith('product/') ? ' class="is-scene"' : ''} src="${img(p.images[0])}" alt="" loading="lazy" decoding="async"></span>
+    <span class="model">${bi(p.model)}</span>
+    <span class="name">${esc(en(p.name))}</span>
+    <span class="name-zh zh">${esc(zh(p.name))}</span>
+  </button>`;
+
 function renderStatic() {
-  slot('taglines').innerHTML = COMPANY.taglines.map(([en, zh]) => `<li><span class="zh">${zh}</span>${esc(en)}</li>`).join('');
-  slot('stats').innerHTML = STATS.map((s) => `<div class="stat"><span class="stat-figure">${esc(s.figure)}</span><span class="stat-label">${esc(s.label)}<span class="zh">${s.zh}</span></span></div>`).join('');
-  slot('story').innerHTML = STORY.map((p) => `<p>${esc(p)}</p>`).join('');
-  slot('divisions').innerHTML = DIVISIONS.map((d) => `
+  slot('taglines-zh').innerHTML = COMPANY.taglines.map(([, z]) => `<span>${esc(z)}</span>`).join('');
+  slot('taglines-en').innerHTML = COMPANY.taglines.map(([e]) => `<span>${esc(e)}</span>`).join('');
+  slot('stats').innerHTML = STATS.map((s) => `<div class="stat"><span class="stat-figure">${esc(s.figure)}${s.unit ? `<small>${s.unit}</small>` : ''}</span><span class="stat-label">${bi(s.label)}</span></div>`).join('');
+  slot('about').innerHTML = `
+    <div class="about-col">${ABOUT.en.map((p) => `<p>${esc(p)}</p>`).join('')}</div>
+    <div class="about-col zh">${ABOUT.zh.map((p) => `<p>${esc(p)}</p>`).join('')}</div>`;
+  slot('core').innerHTML = CORE_BUSINESS.map((b) => `
     <article class="division">
-      <h3>${esc(d.name)}<span class="zh">${d.zh}</span></h3>
-      <p class="unit">${esc(d.unit)}</p>
-      <dl>${d.rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-      <p class="keywords">${esc(d.keywords)}</p>
+      <h3>${bi(b.name)}</h3>
+      <dl>${b.rows.map(([k, v]) => `<div><dt>${bi(k)}</dt><dd>${esc(en(v))}<span class="zh">${esc(zh(v))}</span></dd></div>`).join('')}</dl>
     </article>`).join('');
+  slot('philosophy').innerHTML = PHILOSOPHY.map((m) => `
+    <article class="creed"><h3>${bi(m.title)}</h3><p>${esc(m.en)}</p><p class="zh">${esc(m.zh)}</p></article>`).join('');
 
   slot('featured').innerHTML = PRODUCTS.filter((p) => p.cat === 'featured').map((p) => {
     const first = p.images[0];
-    const media = first
-      ? `<img src="${img(first)}" alt="${esc(p.name)}" loading="lazy">`
-      : `<div class="spot-placeholder"><svg viewBox="0 0 120 120" aria-hidden="true"><rect x="34" y="14" width="52" height="40" rx="12"/><circle cx="50" cy="34" r="5"/><circle cx="70" cy="34" r="5"/><path d="M60 54v12M30 66h60v22H30zM38 88v14M82 88v14M24 102h72M18 76h12M90 76h12"/></svg><p>${esc(p.placeholder)}</p></div>`;
     return `
       <article class="feature">
-        <div class="feature-media${first && isCutout(first) ? ' is-cutout' : ''}${first ? '' : ' is-empty'}">${media}</div>
+        <button class="feature-media${isCutout(first) ? ' is-cutout' : ''}" type="button" data-product="${p.id}" aria-label="${esc(en(p.name))} — pictures">
+          <img src="${img(first)}" alt="${esc(en(p.name))}" loading="lazy" decoding="async">
+        </button>
         <div class="feature-copy">
-          <p class="spot-model">${esc(p.model)}</p>
-          <h3>${esc(p.name)}<span class="zh">${p.zh}</span></h3>
-          <p>${esc(p.lede)}</p>
-          <ul class="spec-list">${p.specs.slice(0, 6).map(([k, v]) => `<li><b>${esc(k)}</b><span>${esc(v)}</span></li>`).join('')}</ul>
-          <button class="button button-ghost button-small" type="button" data-product="${p.id}">All specifications</button>
+          <p class="spot-model">${bi(p.model)}</p>
+          <h3>${bi(p.name)}</h3>
+          <p>${esc(en(p.lede))}</p>
+          <p class="zh">${esc(zh(p.lede))}</p>
+          <ul class="spec-list">${specItems(p.specs, 6)}</ul>
+          <button class="button button-ghost button-small" type="button" data-product="${p.id}">All specifications <span class="zh">全部参数</span></button>
         </div>
       </article>`;
   }).join('');
 
-  slot('filters').innerHTML = [{ id: 'all', name: 'All', zh: '全部' }, ...CATEGORIES.filter((c) => c.id !== 'featured')]
-    .map((c, i) => `<button class="chip" type="button" data-filter="${c.id}" aria-pressed="${i === 0}">${esc(c.name)}<span class="zh">${c.zh}</span></button>`).join('');
-  slot('catalogue').innerHTML = PRODUCTS.filter((p) => p.cat !== 'featured' && p.images.length).map((p) => `
-    <button class="product-card" type="button" data-product="${p.id}" data-cat="${p.cat}">
-      <span class="thumb"><img src="${img(p.images[0])}" alt="" loading="lazy"></span>
-      <span class="model">${esc(p.model)}</span>
-      <span class="name">${esc(p.name)}</span>
-      <span class="name-zh zh">${p.zh}</span>
-    </button>`).join('');
+  slot('filters').innerHTML = [{ id: 'all', name: ['All', '全部'] }, ...CATEGORIES]
+    .map((c, i) => `<button class="chip" type="button" data-filter="${c.id}" aria-pressed="${i === 0}">${bi(c.name)}</button>`).join('');
+  slot('catalogue').innerHTML = PRODUCTS.filter((p) => p.images.length).map(productCard).join('');
 
   slot('factories').innerHTML = FACTORIES.map((f) => `
     <article class="factory">
-      <img src="${img(f.image)}" alt="" loading="lazy">
-      <div><p class="area">${f.area}</p><h3>${esc(f.name)}<span class="zh">${f.zh}</span></h3><p>${esc(f.note)}</p></div>
+      <img src="${img(f.image)}" alt="" loading="lazy" decoding="async">
+      <div>
+        <p class="area">${f.area}</p>
+        <h3>${bi(f.name)}</h3>
+        <p>${esc(f.en)}</p><p class="zh">${esc(f.zh)}</p>
+        <p class="factory-products">${esc(en(f.products))}<span class="zh">${esc(zh(f.products))}</span></p>
+      </div>
     </article>`).join('');
-  slot('strip').innerHTML = STRIP.map(([id, cap]) => `<figure><img src="${img(id)}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`).join('');
+  slot('strip').innerHTML = STRIP.map(([id, e, z]) => `<figure><img src="${img(id)}" alt="${esc(e)}" loading="lazy" decoding="async"><figcaption>${esc(e)}<span class="zh">${esc(z)}</span></figcaption></figure>`).join('');
 
   const today = new Date();
-  slot('certs').innerHTML = CERTIFICATES.map((c) => certIsCurrent(c, today)
-    ? `<button class="cert" type="button" data-cert="${c.id}"><img src="${img(c.image)}" alt="${esc(c.standard)} certificate" loading="lazy"><h3>${esc(c.standard)}</h3><p>${esc(c.scope)}</p><p>${esc(c.body)}${c.validUntil ? ` · valid to ${c.validUntil}` : ''}</p></button>`
-    // past its printed expiry: show the standard, not the out-of-date scan
-    : `<div class="cert"><div class="cert-badge"><strong>${esc(c.standard)}</strong><small>Current certificate available from our team on request</small></div><h3>${esc(c.standard)}</h3><p>${esc(c.scope)}</p></div>`,
-  ).join('') + `<p class="systems"><span>Also certified:</span>${OTHER_SYSTEMS.map((s) => `<span class="badge">${esc(s)}</span>`).join('')}</p>`;
+  slot('certs').innerHTML = CERTIFICATES.map((c) => {
+    const head = `<h3>${esc(c.standard)}</h3><p>${bi(c.scope)}</p>`;
+    if (c.image && certIsCurrent(c, today)) {
+      return `<button class="cert" type="button" data-cert="${c.id}"><img src="${img(c.image)}" alt="${esc(c.standard)} certificate" loading="lazy" decoding="async">${head}
+        <p class="cert-meta">${esc(c.body)}${c.validUntil ? ` · valid to ${c.validUntil} <span class="zh">有效期至 ${c.validUntil}</span>` : ''}</p></button>`;
+    }
+    // past its printed expiry: show the standard, not an out-of-date scan
+    return `<div class="cert"><div class="cert-badge"><strong>${esc(c.standard)}</strong><small>Current certificate available from our team on request<span class="zh">最新证书可向工作人员索取</span></small></div>${head}</div>`;
+  }).join('');
 
-  slot('partners').innerHTML = PARTNERS.map((p) => `<div class="logo-tile"><div class="logo-ink" role="img" aria-label="${esc(PARTNER_LABELS[p.id])}" style="--logo:url('${new URL(p.src, document.baseURI).href}')"></div>${p.text ? `<span class="logo-text">${p.text}</span>` : ''}</div>`).join('');
-  slot('timeline').innerHTML = MILESTONES.map(([y, t, d]) => `<li><b>${y}</b><strong>${esc(t)}</strong><p>${esc(d)}</p></li>`).join('');
+  // slide 8: ISO 3834-2 on a row of its own
+  slot('welding').hidden = !WELDING.show;
+  slot('welding').innerHTML = `
+    <div class="welding-copy">
+      <p class="eyebrow">${esc(WELDING.standard)}</p>
+      <h3>${bi(WELDING.title)}</h3>
+      <ul class="welding-team">${WELDING.team.map(([e, z, n]) => `<li><b>${n}</b><span>${esc(e)}<span class="zh">${esc(z)}</span></span></li>`).join('')}</ul>
+    </div>
+    <button class="welding-cert" type="button" data-cert-image="${WELDING.certificate}" aria-label="${esc(WELDING.standard)} certificate"><img src="${img(WELDING.certificate)}" alt="" loading="lazy" decoding="async"></button>
+    <div class="welding-people">${WELDING.welders.map((w, i) => `<button type="button" data-cert-image="${w}" aria-label="Welder certificate ${i + 1}" style="--i:${i}"><img src="${img(w)}" alt="" loading="lazy" decoding="async"></button>`).join('')}</div>`;
+
+  slot('partners').innerHTML = PARTNERS.map((p) => partnerTile(p)).join('');
+  slot('timeline').innerHTML = MILESTONES.map(([y, e, z]) => `<li><b>${y}</b><strong>${esc(e)}</strong><span class="zh">${esc(z)}</span></li>`).join('');
   slot('contact').innerHTML = `
-    <div><dt>Companies</dt>${COMPANY.names.map((n) => `<dd>${esc(n)}</dd>`).join('')}${COMPANY.namesZh.map((n) => `<dd class="zh">${n}</dd>`).join('')}</div>
-    <div><dt>Website</dt><dd>${COMPANY.web}</dd></div>
-    <div><dt>Telephone</dt><dd dir="ltr">${COMPANY.phone}</dd><dd dir="ltr">${COMPANY.mobile}</dd></div>
-    <div><dt>Email</dt><dd>${COMPANY.email}</dd></div>
-    <div><dt>Address</dt><dd>${esc(COMPANY.address)}</dd></div>`;
+    <div><dt>Companies <span class="zh">公司</span></dt>${COMPANY.names.map((n, i) => `<dd>${esc(n)}<span class="zh">${COMPANY.namesZh[i]}</span></dd>`).join('')}</div>
+    <div><dt>Telephone <span class="zh">电话</span></dt><dd dir="ltr">${COMPANY.phone}</dd><dd dir="ltr">${COMPANY.mobile}</dd></div>
+    <div><dt>Email <span class="zh">邮箱</span></dt>${COMPANY.emails.map((e) => `<dd>${e}</dd>`).join('')}</div>
+    <div><dt>Website <span class="zh">网站</span></dt>${COMPANY.webs.map((w) => `<dd>${w}</dd>`).join('')}</div>
+    <div><dt>Address <span class="zh">地址</span></dt><dd>${bi(COMPANY.address)}</dd></div>`;
+  slot('social').innerHTML = `
+    <h3>Social Media Accounts <span class="zh">社交媒体账号</span></h3>
+    <p class="social-lede">Scan to follow <span class="zh">扫码关注</span></p>
+    <div class="qr-row">${COMPANY.social.map(([e, z, h, qr]) => `
+      <figure class="qr"><img src="${img(qr)}" alt="QR code — ${esc(e)} ${esc(z)}" loading="lazy" decoding="async">
+        <figcaption><b>${esc(e)}</b><span class="zh">${esc(z)}</span><em>${esc(h)}</em></figcaption></figure>`).join('')}</div>`;
 }
 
 function wireCatalogue() {
@@ -103,20 +139,19 @@ export function openProduct(id) {
   const p = byId[id];
   if (!p) return;
   const images = p.images;
-  const caption = (src) => p.captions?.[src] ?? '';
+  const caption = (src) => p.captions?.[src];
+  const captionHtml = (src) => (caption(src) ? bi(caption(src)) : '');
   sheetBody.innerHTML = `
     <div class="gallery">
-      <figure class="gallery-main">${images.length
-        ? `<img src="${img(images[0])}" alt="${esc(p.name)}"><figcaption ${caption(images[0]) ? '' : 'hidden'}>${esc(caption(images[0]))}</figcaption>`
-        : '<div class="spot-placeholder"><p>On the stand — come and see it move.</p></div>'}</figure>
+      <figure class="gallery-main"><img src="${img(images[0])}" alt="${esc(en(p.name))}"><figcaption ${caption(images[0]) ? '' : 'hidden'}>${captionHtml(images[0])}</figcaption></figure>
       ${images.length > 1 ? `<div class="gallery-thumbs">${images.map((src, i) => `<button type="button" data-src="${src}" aria-current="${i === 0}" aria-label="Picture ${i + 1}"><img src="${img(src)}" alt=""></button>`).join('')}</div>` : ''}
     </div>
     <div class="sheet-info">
-      <p class="spot-model">${esc(p.model)}</p>
-      <h2 id="sheet-title">${esc(p.name)}<span class="zh">${p.zh}</span></h2>
-      ${p.lede ? `<p class="spot-lede">${esc(p.lede)}</p>` : ''}
-      ${p.specs.length ? `<ul class="spec-list">${p.specs.map(([k, v]) => `<li><b>${esc(k)}</b><span>${esc(v)}</span></li>`).join('')}</ul>` : '<p class="spot-lede">Full specifications are available from our team at the stand.</p>'}
-      <button class="button button-primary" type="button" data-action="lead" data-interest="${p.cat}">Ask about this product</button>
+      <p class="spot-model">${bi(p.model)}</p>
+      <h2 id="sheet-title">${bi(p.name)}</h2>
+      ${p.lede ? `<p class="spot-lede">${esc(en(p.lede))}</p><p class="spot-lede zh">${esc(zh(p.lede))}</p>` : ''}
+      ${p.specs.length ? `<ul class="spec-list">${specItems(p.specs)}</ul>` : '<p class="spot-lede">Full specifications are available from our team at the stand.<span class="zh">详细参数请咨询展台工作人员。</span></p>'}
+      <button class="button button-primary" type="button" data-action="lead" data-interest="${p.cat}">Ask about this product <span class="zh">咨询此产品</span></button>
     </div>`;
   sheetBody.querySelector('.gallery-thumbs')?.addEventListener('click', (event) => {
     const thumb = event.target.closest('[data-src]');
@@ -124,20 +159,20 @@ export function openProduct(id) {
     const main = sheetBody.querySelector('.gallery-main');
     main.querySelector('img').src = img(thumb.dataset.src);
     const cap = main.querySelector('figcaption');
-    cap.textContent = caption(thumb.dataset.src);
-    cap.hidden = !cap.textContent;
+    cap.innerHTML = captionHtml(thumb.dataset.src);
+    cap.hidden = !cap.innerHTML;
     sheetBody.querySelectorAll('.gallery-thumbs button').forEach((b) => b.setAttribute('aria-current', String(b === thumb)));
   });
   sheet.showModal();
-  sheet.scrollTop = 0;
+  sheetBody.scrollTop = 0;
 }
 
 const certSheet = document.getElementById('cert-sheet');
-function openCert(id) {
+function openCert(id, imageId) {
   const c = CERTIFICATES.find((x) => x.id === id);
   const image = document.getElementById('cert-image');
-  image.src = img(c.image);
-  image.alt = `${c.standard} certificate`;
+  image.src = img(imageId ?? c.image);
+  image.alt = c ? `${c.standard} certificate` : 'Certificate';
   certSheet.showModal();
 }
 
@@ -154,28 +189,96 @@ function wireNav() {
   sections.forEach((s) => s && seen.observe(s));
 }
 
-export async function prepareFilm() {
+// The factory filmstrip drifts on its own, looping without a seam (the photos
+// are repeated once). A touch, drag or wheel stops it; it carries on from
+// wherever the visitor left it a few seconds later. Off-screen, hidden or
+// reduced-motion: it stays still.
+function driftStrip() {
+  const strip = slot('strip');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const originals = [...strip.children];
+  originals.forEach((figure) => {
+    const copy = figure.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    copy.querySelectorAll('img').forEach((i) => { i.alt = ''; });
+    strip.append(copy);
+  });
+  const SPEED = 36; // px per second
+  let pos = 0;
+  let last = 0;
+  let held = false;
+  let visible = false;
+  let resume = 0;
+  const loop = () => strip.children[originals.length].offsetLeft - originals[0].offsetLeft;
+
+  const hold = () => { held = true; clearTimeout(resume); };
+  const release = () => {
+    clearTimeout(resume);
+    resume = setTimeout(() => { pos = strip.scrollLeft; held = false; }, 3500);
+  };
+  strip.addEventListener('pointerdown', hold);
+  strip.addEventListener('wheel', () => { hold(); release(); }, { passive: true });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach((type) => strip.addEventListener(type, () => { if (held) release(); }));
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(strip);
+
+  const frame = (now) => {
+    const dt = last ? Math.min((now - last) / 1000, 0.1) : 0;
+    last = now;
+    if (!held && visible && !document.hidden && document.body.dataset.mode === 'explore') {
+      const width = loop();
+      pos += SPEED * dt;
+      if (pos >= width) pos -= width;
+      strip.scrollLeft = pos;
+    }
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+}
+
+// the page's film player: English by default, Chinese on request
+let filmVersion = FILM.default;
+async function loadFilm(version) {
   const player = document.getElementById('film-player');
-  if (!player.src) player.src = await localUrl(FILM.src);
+  const wasPlaying = !player.paused;
+  filmVersion = version;
+  player.src = await localUrl(FILM.versions[version].src);
+  document.querySelectorAll('[data-film]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.film === version)));
+  if (wasPlaying) player.play().catch(() => {});
+}
+
+export async function prepareFilm() {
+  if (!document.getElementById('film-player').src) await loadFilm(filmVersion);
 }
 
 export function initSite() {
   renderStatic();
+  document.querySelector('.film-switch').innerHTML = Object.entries(FILM.versions)
+    .map(([key, v]) => `<button class="chip" type="button" data-film="${key}" aria-pressed="${key === FILM.default}">${bi(v.label)}</button>`).join('');
+  document.querySelector('.film-switch').addEventListener('click', (event) => {
+    const choice = event.target.closest('[data-film]');
+    if (choice && choice.dataset.film !== filmVersion) loadFilm(choice.dataset.film);
+  });
   wireCatalogue();
   wireNav();
+  driftStrip();
   document.addEventListener('click', (event) => {
     const product = event.target.closest('[data-product]');
     if (product) openProduct(product.dataset.product);
     const cert = event.target.closest('[data-cert]');
     if (cert) openCert(cert.dataset.cert);
+    const scan = event.target.closest('[data-cert-image]');
+    if (scan) openCert(null, scan.dataset.certImage);
   });
-  // tapping outside a sheet closes it
-  [sheet, certSheet].forEach((d) => d.addEventListener('click', (event) => { if (event.target === d) d.close(); }));
+  // the × button and a tap on the backdrop both close a sheet
+  [sheet, certSheet].forEach((d) => d.addEventListener('click', (event) => {
+    if (event.target === d || event.target.closest('[data-close]')) d.close();
+  }));
 }
 
 export function resetSite() {
   [sheet, certSheet].forEach((d) => d.open && d.close());
   document.getElementById('film-player').pause();
+  if (filmVersion !== FILM.default) loadFilm(FILM.default);
   slot('filters').querySelector('[data-filter="all"]')?.click();
   window.scrollTo({ top: 0, behavior: 'instant' });
 }

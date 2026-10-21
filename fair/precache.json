@@ -1,13 +1,13 @@
 {
- "version": "5f4a344e77d4",
+ "version": "b4c95334e59b",
  "files": [
   {
    "url": "index.html",
-   "bytes": 17919
+   "bytes": 20513
   },
   {
    "url": "assets/css/fair.css",
-   "bytes": 42363
+   "bytes": 54880
   },
   {
    "url": "assets/css/fonts.css",
@@ -15,7 +15,7 @@
   },
   {
    "url": "assets/css/rising.css",
-   "bytes": 13994
+   "bytes": 15745
   },
   {
    "url": "assets/fonts/dmsans-latin-ext.woff2",
@@ -83,7 +83,7 @@
   },
   {
    "url": "assets/img/cert/iatf-16949.webp",
-   "bytes": 56576
+   "bytes": 68718
   },
   {
    "url": "assets/img/cert/iso-13485.webp",
@@ -91,11 +91,71 @@
   },
   {
    "url": "assets/img/cert/iso-14001.webp",
-   "bytes": 45262
+   "bytes": 231182
+  },
+  {
+   "url": "assets/img/cert/iso-3834.webp",
+   "bytes": 21564
+  },
+  {
+   "url": "assets/img/cert/iso-45001.webp",
+   "bytes": 247208
   },
   {
    "url": "assets/img/cert/iso-9001.webp",
-   "bytes": 81214
+   "bytes": 102466
+  },
+  {
+   "url": "assets/img/cert/sa8000.webp",
+   "bytes": 79418
+  },
+  {
+   "url": "assets/img/cert/welder-1.webp",
+   "bytes": 19282
+  },
+  {
+   "url": "assets/img/cert/welder-2.webp",
+   "bytes": 16088
+  },
+  {
+   "url": "assets/img/cert/welder-3.webp",
+   "bytes": 15756
+  },
+  {
+   "url": "assets/img/cert/welder-4.webp",
+   "bytes": 19530
+  },
+  {
+   "url": "assets/img/cert/welder-5.webp",
+   "bytes": 14830
+  },
+  {
+   "url": "assets/img/cert/welder-6.webp",
+   "bytes": 19706
+  },
+  {
+   "url": "assets/img/cert/welder-7.webp",
+   "bytes": 19638
+  },
+  {
+   "url": "assets/img/cert/welder-8.webp",
+   "bytes": 16170
+  },
+  {
+   "url": "assets/img/cover/background.webp",
+   "bytes": 25636
+  },
+  {
+   "url": "assets/img/cover/company-name.webp",
+   "bytes": 91222
+  },
+  {
+   "url": "assets/img/cover/herstar.webp",
+   "bytes": 34994
+  },
+  {
+   "url": "assets/img/cover/hosun.webp",
+   "bytes": 19950
   },
   {
    "url": "assets/img/factory/assembly-1.webp",
@@ -218,12 +278,16 @@
    "bytes": 61228
   },
   {
+   "url": "assets/img/film/poster.webp",
+   "bytes": 31550
+  },
+  {
    "url": "assets/img/film/precision.webp",
    "bytes": 22018
   },
   {
    "url": "assets/img/film/rnd.webp",
-   "bytes": 37824
+   "bytes": 38776
   },
   {
    "url": "assets/img/film/robot.webp",
@@ -239,19 +303,19 @@
   },
   {
    "url": "assets/img/product/ankle-a.webp",
-   "bytes": 17194
+   "bytes": 29422
   },
   {
    "url": "assets/img/product/ankle-b.webp",
-   "bytes": 25364
+   "bytes": 52342
   },
   {
    "url": "assets/img/product/ankle-c.webp",
-   "bytes": 17666
+   "bytes": 40284
   },
   {
    "url": "assets/img/product/ankle-d.webp",
-   "bytes": 17202
+   "bytes": 38614
   },
   {
    "url": "assets/img/product/ankle-scene.webp",
@@ -259,7 +323,7 @@
   },
   {
    "url": "assets/img/product/basin-models.webp",
-   "bytes": 27214
+   "bytes": 27898
   },
   {
    "url": "assets/img/product/basin-scene.webp",
@@ -270,20 +334,24 @@
    "bytes": 35300
   },
   {
+   "url": "assets/img/product/basin.webp",
+   "bytes": 17526
+  },
+  {
    "url": "assets/img/product/bath-lift-a.webp",
-   "bytes": 20766
+   "bytes": 22476
   },
   {
    "url": "assets/img/product/bath-lift-b.webp",
-   "bytes": 16038
+   "bytes": 25506
   },
   {
    "url": "assets/img/product/bath-lift-c.webp",
-   "bytes": 19238
+   "bytes": 24586
   },
   {
    "url": "assets/img/product/bath-lift-views.webp",
-   "bytes": 35286
+   "bytes": 35206
   },
   {
    "url": "assets/img/product/cabinet-lift-glass.webp",
@@ -299,7 +367,7 @@
   },
   {
    "url": "assets/img/product/cabinet-lift.webp",
-   "bytes": 12276
+   "bytes": 14396
   },
   {
    "url": "assets/img/product/desk-coffee-views.webp",
@@ -307,11 +375,11 @@
   },
   {
    "url": "assets/img/product/desk-coffee.webp",
-   "bytes": 20460
+   "bytes": 20720
   },
   {
    "url": "assets/img/product/desk-executive.webp",
-   "bytes": 8066
+   "bytes": 8296
   },
   {
    "url": "assets/img/product/desk-four-leg-views.webp",
@@ -319,15 +387,15 @@
   },
   {
    "url": "assets/img/product/desk-four-leg.webp",
-   "bytes": 12682
+   "bytes": 16356
   },
   {
    "url": "assets/img/product/desk-gaming-views.webp",
-   "bytes": 39476
+   "bytes": 39426
   },
   {
    "url": "assets/img/product/desk-gaming.webp",
-   "bytes": 38050
+   "bytes": 43674
   },
   {
    "url": "assets/img/product/desk-health.webp",
@@ -339,7 +407,7 @@
   },
   {
    "url": "assets/img/product/desk-office-dual.webp",
-   "bytes": 24896
+   "bytes": 24600
   },
   {
    "url": "assets/img/product/desk-office-wood-views.webp",
@@ -347,7 +415,7 @@
   },
   {
    "url": "assets/img/product/desk-office-wood.webp",
-   "bytes": 19154
+   "bytes": 18848
   },
   {
    "url": "assets/img/product/desk-student-views.webp",
@@ -355,63 +423,63 @@
   },
   {
    "url": "assets/img/product/desk-student.webp",
-   "bytes": 19310
+   "bytes": 19010
   },
   {
    "url": "assets/img/product/em-2001-a.webp",
-   "bytes": 26960
+   "bytes": 36520
   },
   {
    "url": "assets/img/product/em-2001-b.webp",
-   "bytes": 28878
+   "bytes": 35570
   },
   {
    "url": "assets/img/product/em-2002-a.webp",
-   "bytes": 38478
+   "bytes": 42744
   },
   {
    "url": "assets/img/product/em-2002-b.webp",
-   "bytes": 33422
+   "bytes": 33028
   },
   {
    "url": "assets/img/product/em-3001-a.webp",
-   "bytes": 28562
+   "bytes": 34886
   },
   {
    "url": "assets/img/product/em-3001-b.webp",
-   "bytes": 32870
+   "bytes": 48374
   },
   {
    "url": "assets/img/product/em-3002-a.webp",
-   "bytes": 29028
+   "bytes": 38746
   },
   {
    "url": "assets/img/product/em-3002-b.webp",
-   "bytes": 24808
+   "bytes": 38500
   },
   {
    "url": "assets/img/product/em-3003-a.webp",
-   "bytes": 22258
+   "bytes": 26042
   },
   {
    "url": "assets/img/product/em-3003-b.webp",
-   "bytes": 27480
+   "bytes": 33022
   },
   {
    "url": "assets/img/product/em-5001-a.webp",
-   "bytes": 23698
+   "bytes": 33118
   },
   {
    "url": "assets/img/product/em-5001-b.webp",
-   "bytes": 32198
+   "bytes": 44230
   },
   {
    "url": "assets/img/product/em-5002-a.webp",
-   "bytes": 42690
+   "bytes": 42618
   },
   {
    "url": "assets/img/product/em-5002-b.webp",
-   "bytes": 38820
+   "bytes": 38232
   },
   {
    "url": "assets/img/product/hob-b.webp",
@@ -419,11 +487,11 @@
   },
   {
    "url": "assets/img/product/hob.webp",
-   "bytes": 14998
+   "bytes": 16000
   },
   {
    "url": "assets/img/product/hoist-b.webp",
-   "bytes": 34124
+   "bytes": 40896
   },
   {
    "url": "assets/img/product/hoist-room.webp",
@@ -431,47 +499,47 @@
   },
   {
    "url": "assets/img/product/hoist.webp",
-   "bytes": 23294
+   "bytes": 45784
   },
   {
    "url": "assets/img/product/rollator-b.webp",
-   "bytes": 38366
+   "bytes": 50284
   },
   {
    "url": "assets/img/product/rollator-dims.webp",
-   "bytes": 52990
+   "bytes": 73564
   },
   {
    "url": "assets/img/product/rollator-downhill.webp",
-   "bytes": 39468
+   "bytes": 45840
   },
   {
    "url": "assets/img/product/rollator-folded.webp",
-   "bytes": 41826
+   "bytes": 47080
   },
   {
    "url": "assets/img/product/rollator-seat.webp",
-   "bytes": 26392
+   "bytes": 29308
   },
   {
    "url": "assets/img/product/rollator-stop.webp",
-   "bytes": 41240
+   "bytes": 47722
   },
   {
    "url": "assets/img/product/rollator-straight.webp",
-   "bytes": 33338
+   "bytes": 37840
   },
   {
    "url": "assets/img/product/rollator-uphill.webp",
-   "bytes": 38376
+   "bytes": 46598
   },
   {
    "url": "assets/img/product/rollator.webp",
-   "bytes": 39522
+   "bytes": 56876
   },
   {
    "url": "assets/img/product/shower-chair-dims.webp",
-   "bytes": 34800
+   "bytes": 35360
   },
   {
    "url": "assets/img/product/shower-chair-scene.webp",
@@ -479,7 +547,7 @@
   },
   {
    "url": "assets/img/product/shower-chair.webp",
-   "bytes": 24828
+   "bytes": 24126
   },
   {
    "url": "assets/img/product/sink-kitchen.webp",
@@ -487,27 +555,27 @@
   },
   {
    "url": "assets/img/product/sink.webp",
-   "bytes": 14338
+   "bytes": 14410
   },
   {
    "url": "assets/img/product/table-angled.webp",
-   "bytes": 9214
+   "bytes": 15692
   },
   {
    "url": "assets/img/product/table-overbed.webp",
-   "bytes": 9336
+   "bytes": 11162
   },
   {
    "url": "assets/img/product/table-pneumatic.webp",
-   "bytes": 8366
+   "bytes": 11782
   },
   {
    "url": "assets/img/product/table-side-round.webp",
-   "bytes": 8804
+   "bytes": 13454
   },
   {
    "url": "assets/img/product/table-side.webp",
-   "bytes": 6164
+   "bytes": 5896
   },
   {
    "url": "assets/img/product/table-tilting-views.webp",
@@ -515,7 +583,7 @@
   },
   {
    "url": "assets/img/product/table-tilting.webp",
-   "bytes": 16858
+   "bytes": 21452
   },
   {
    "url": "assets/img/product/toilet-lift-b.webp",
@@ -523,23 +591,31 @@
   },
   {
    "url": "assets/img/product/toilet-lift.webp",
-   "bytes": 27916
+   "bytes": 29058
   },
   {
    "url": "assets/img/product/transfer-device-b.webp",
-   "bytes": 27366
+   "bytes": 28236
+  },
+  {
+   "url": "assets/img/product/transfer-device-single.webp",
+   "bytes": 19286
   },
   {
    "url": "assets/img/product/transfer-device-views.webp",
-   "bytes": 42010
+   "bytes": 44488
   },
   {
    "url": "assets/img/product/transfer-device.webp",
    "bytes": 52186
   },
   {
+   "url": "assets/img/product/transfer-robot.webp",
+   "bytes": 31780
+  },
+  {
    "url": "assets/img/product/wardrobe-rail.webp",
-   "bytes": 7808
+   "bytes": 10976
   },
   {
    "url": "assets/img/product/wardrobe-scene-1.webp",
@@ -551,7 +627,7 @@
   },
   {
    "url": "assets/img/product/wheel-washer-b.webp",
-   "bytes": 98208
+   "bytes": 99638
   },
   {
    "url": "assets/img/product/wheel-washer-c.webp",
@@ -562,12 +638,32 @@
    "bytes": 52508
   },
   {
+   "url": "assets/img/product/xray-c-arm.webp",
+   "bytes": 35304
+  },
+  {
+   "url": "assets/img/qr/douyin.webp",
+   "bytes": 252540
+  },
+  {
+   "url": "assets/img/qr/jd.webp",
+   "bytes": 63058
+  },
+  {
+   "url": "assets/img/qr/wechat-channels.webp",
+   "bytes": 69728
+  },
+  {
+   "url": "assets/img/qr/wechat-official.webp",
+   "bytes": 84962
+  },
+  {
    "url": "assets/js/app.js",
-   "bytes": 6455
+   "bytes": 6915
   },
   {
    "url": "assets/js/content.js",
-   "bytes": 29658
+   "bytes": 46555
   },
   {
    "url": "assets/js/db.js",
@@ -579,7 +675,7 @@
   },
   {
    "url": "assets/js/leads.js",
-   "bytes": 13413
+   "bytes": 13765
   },
   {
    "url": "assets/js/offline.js",
@@ -595,43 +691,19 @@
   },
   {
    "url": "assets/js/showreel.js",
-   "bytes": 11455
+   "bytes": 10573
   },
   {
    "url": "assets/js/site.js",
-   "bytes": 10623
+   "bytes": 15384
   },
   {
    "url": "assets/js/staff.js",
    "bytes": 13471
   },
   {
-   "url": "assets/logos/arjo.png",
-   "bytes": 11585
-  },
-  {
-   "url": "assets/logos/barco.png",
-   "bytes": 19936
-  },
-  {
-   "url": "assets/logos/bmw.png",
-   "bytes": 8755
-  },
-  {
-   "url": "assets/logos/carestream.png",
-   "bytes": 5370
-  },
-  {
-   "url": "assets/logos/daikin.png",
-   "bytes": 13438
-  },
-  {
-   "url": "assets/logos/dewertokin.png",
-   "bytes": 8416
-  },
-  {
-   "url": "assets/logos/genertec.png",
-   "bytes": 32827
+   "url": "assets/js/ui.js",
+   "bytes": 1194
   },
   {
    "url": "assets/logos/herstar-light.svg",
@@ -658,63 +730,139 @@
    "bytes": 193881
   },
   {
-   "url": "assets/logos/hubei-health.png",
-   "bytes": 6130
+   "url": "assets/logos/partners/aichi.png",
+   "bytes": 19495
   },
   {
-   "url": "assets/logos/kessebohmer.png",
-   "bytes": 8106
+   "url": "assets/logos/partners/arjo.png",
+   "bytes": 32989
   },
   {
-   "url": "assets/logos/linak.png",
-   "bytes": 6094
+   "url": "assets/logos/partners/assa-abloy.png",
+   "bytes": 23047
   },
   {
-   "url": "assets/logos/maquet.png",
-   "bytes": 12599
+   "url": "assets/logos/partners/barco.png",
+   "bytes": 23322
   },
   {
-   "url": "assets/logos/paramount-bed.png",
-   "bytes": 14060
+   "url": "assets/logos/partners/bmw.svg",
+   "bytes": 12190
   },
   {
-   "url": "assets/logos/philips.png",
-   "bytes": 6413
+   "url": "assets/logos/partners/carestream.png",
+   "bytes": 45687
   },
   {
-   "url": "assets/logos/siemens.png",
-   "bytes": 3145
+   "url": "assets/logos/partners/daikin.png",
+   "bytes": 22659
   },
   {
-   "url": "assets/logos/suzhou-health.png",
-   "bytes": 24633
+   "url": "assets/logos/partners/dewertokin.svg",
+   "bytes": 8790
   },
   {
-   "url": "assets/logos/taikang.png",
-   "bytes": 18569
+   "url": "assets/logos/partners/emerson.png",
+   "bytes": 28184
   },
   {
-   "url": "assets/logos/toyota.png",
-   "bytes": 6356
+   "url": "assets/logos/partners/fujikoki.png",
+   "bytes": 48363
   },
   {
-   "url": "assets/logos/viessmann.png",
-   "bytes": 12124
+   "url": "assets/logos/partners/genertec.png",
+   "bytes": 61666
   },
   {
-   "url": "assets/logos/vishee.png",
-   "bytes": 14231
+   "url": "assets/logos/partners/getein.png",
+   "bytes": 82412
   },
   {
-   "url": "assets/logos/zf.png",
-   "bytes": 19305
+   "url": "assets/logos/partners/jbinfo.png",
+   "bytes": 25196
+  },
+  {
+   "url": "assets/logos/partners/kessebohmer.png",
+   "bytes": 34703
+  },
+  {
+   "url": "assets/logos/partners/linak.png",
+   "bytes": 6684
+  },
+  {
+   "url": "assets/logos/partners/maquet.png",
+   "bytes": 40769
+  },
+  {
+   "url": "assets/logos/partners/meyer.svg",
+   "bytes": 8929
+  },
+  {
+   "url": "assets/logos/partners/mitsubishi-electric.png",
+   "bytes": 28920
+  },
+  {
+   "url": "assets/logos/partners/nantong-xinhui.png",
+   "bytes": 41084
+  },
+  {
+   "url": "assets/logos/partners/nuctech.png",
+   "bytes": 36998
+  },
+  {
+   "url": "assets/logos/partners/paramount-bed.png",
+   "bytes": 32168
+  },
+  {
+   "url": "assets/logos/partners/perlove.png",
+   "bytes": 66056
+  },
+  {
+   "url": "assets/logos/partners/philips.png",
+   "bytes": 15195
+  },
+  {
+   "url": "assets/logos/partners/siemens.png",
+   "bytes": 16952
+  },
+  {
+   "url": "assets/logos/partners/suzhou-health.png",
+   "bytes": 44773
+  },
+  {
+   "url": "assets/logos/partners/taikang.png",
+   "bytes": 63102
+  },
+  {
+   "url": "assets/logos/partners/toyota.png",
+   "bytes": 11335
+  },
+  {
+   "url": "assets/logos/partners/viessmann.svg",
+   "bytes": 4098
+  },
+  {
+   "url": "assets/logos/partners/vishee.png",
+   "bytes": 26757
+  },
+  {
+   "url": "assets/logos/partners/wolf.png",
+   "bytes": 21005
+  },
+  {
+   "url": "assets/logos/partners/zf.png",
+   "bytes": 32711
   },
   {
    "url": "manifest.webmanifest",
    "bytes": 599
   },
   {
-   "url": "assets/video/film-1080.mp4",
+   "url": "assets/video/film-en-1080.mp4",
+   "bytes": 46434260
+  },
+  {
+   "url": "assets/video/film-zh-1080.mp4",
    "bytes": 43910165
   }
  ]

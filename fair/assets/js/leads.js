@@ -83,6 +83,11 @@ function setLanguage(code) {
   dialog.lang = code === 'zh' ? 'zh-Hans' : code;
   dialog.dir = meta.dir;
   dialog.querySelectorAll('[data-t]').forEach((n) => { n.textContent = t(n.dataset.t); });
+  // in English the heading also carries its Chinese, like every other page heading
+  if (code === 'en') {
+    document.getElementById('lead-title').insertAdjacentHTML('beforeend', ` <span class="zh">${STRINGS.zh.title}</span>`);
+    dialog.querySelector('.lead-lede').insertAdjacentHTML('beforeend', `<span class="zh">${STRINGS.zh.lede}</span>`);
+  }
   dialog.querySelectorAll('[data-t-label]').forEach((n) => n.setAttribute('aria-label', t(n.dataset.tLabel)));
   dialog.querySelectorAll('[data-t-placeholder]').forEach((n) => { n.placeholder = t(n.dataset.tPlaceholder); });
   document.querySelectorAll('#lead-langs [data-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === code)));

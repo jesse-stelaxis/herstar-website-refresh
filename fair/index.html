@@ -24,16 +24,16 @@
   <section class="boot" id="boot" aria-live="polite">
     <div class="boot-inner">
       <img class="boot-logo" src="assets/logos/hosun.svg" alt="HOSUN 恒升">
-      <p class="boot-title">Preparing the showcase for offline use</p>
+      <p class="boot-title">Preparing the showcase for offline use<span class="zh">正在为离线展示做准备</span></p>
       <div class="lift-gauge" aria-hidden="true"><i id="boot-bar"></i></div>
-      <p class="boot-count" id="boot-count">Checking what is already saved…</p>
-      <p class="boot-note" id="boot-note">Every photo and the film are saved on this tablet, so the booth keeps running without the venue Wi-Fi.</p>
-      <button class="button button-ghost" id="boot-skip" type="button" hidden>Start with what is saved</button>
+      <p class="boot-count" id="boot-count">Checking what is already saved…<span class="zh">正在检查已保存内容…</span></p>
+      <p class="boot-note" id="boot-note">Every photo and the film are saved on this tablet, so the booth keeps running without the venue Wi-Fi.<span class="zh">所有图片与影片都会保存在本平板上，即使展馆网络中断也能正常展示。</span></p>
+      <button class="button button-ghost" id="boot-skip" type="button" hidden>Start with what is saved <span class="zh">使用已保存内容开始</span></button>
     </div>
   </section>
 
   <!-- ===================== the showreel ===================== -->
-  <section class="reel" id="reel" aria-label="Showcase — tap anywhere to explore" aria-roledescription="slideshow">
+  <section class="reel" id="reel" aria-label="Showcase — tap anywhere to explore · 展示中，点击任意处浏览" aria-roledescription="slideshow">
     <div class="reel-stage" id="reel-stage"></div>
 
     <header class="reel-top">
@@ -53,7 +53,7 @@
       <button class="button button-primary" type="button" data-action="lead">
         <span>Leave your contact</span><span class="zh">留下联系方式</span>
       </button>
-      <button class="pumpkin-switch" type="button" data-action="toggle-rising" aria-label="Halloween mode">
+      <button class="pumpkin-switch" type="button" data-action="toggle-rising" aria-label="Halloween mode · 万圣节模式">
         <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#pumpkin"/></svg>
       </button>
     </footer>
@@ -67,56 +67,62 @@
         <img class="logo-herstar" src="assets/logos/herstar.svg" alt="HERSTAR 恒而思达">
       </a>
       <nav class="site-nav" aria-label="Sections">
-        <a href="#profile">Group</a>
-        <a href="#featured">At the fair</a>
-        <a href="#products">Products</a>
-        <a href="#factory">Factories</a>
-        <a href="#quality">Quality</a>
-        <a href="#partners">Partners</a>
-        <a href="#milestones">Milestones</a>
-        <a href="#film">Film</a>
+        <a href="#profile">About<span class="zh">概况</span></a>
+        <a href="#featured">At the fair<span class="zh">展会重点</span></a>
+        <a href="#products">Products<span class="zh">产品</span></a>
+        <a href="#factory">Factories<span class="zh">工厂</span></a>
+        <a href="#quality">Certification<span class="zh">认证</span></a>
+        <a href="#partners">Customers<span class="zh">客户</span></a>
+        <a href="#milestones">History<span class="zh">历程</span></a>
+        <a href="#contact">Contact<span class="zh">联系</span></a>
       </nav>
       <div class="site-actions">
-        <button class="pumpkin-switch" type="button" data-action="toggle-rising" aria-label="Halloween mode">
+        <button class="pumpkin-switch" type="button" data-action="toggle-rising" aria-label="Halloween mode · 万圣节模式">
           <svg viewBox="0 0 32 32" aria-hidden="true"><use href="#pumpkin"/></svg>
         </button>
-        <button class="button button-quiet button-small" type="button" data-action="reel" aria-label="Back to the showcase">▶ Showcase</button>
-        <button class="button button-primary button-small" type="button" data-action="lead">Leave your contact</button>
+        <button class="button button-quiet button-small" type="button" data-action="reel" aria-label="Back to the showcase">▶ Showcase <span class="zh">展示</span></button>
+        <button class="button button-primary button-small" type="button" data-action="lead">Leave your contact <span class="zh">留下联系方式</span></button>
       </div>
     </header>
 
     <main>
-      <section class="cover" id="top">
-        <div class="cover-ghost" aria-hidden="true">HOSUN</div>
-        <div class="cover-mark" aria-hidden="true"><span>HERSTAR</span></div>
-        <div class="cover-copy">
-          <p class="cover-kicker rising-only">Halloween at the booth</p>
-          <h1 class="cover-title">
-            <span class="cover-word">HOSUN</span>
-            <span class="cover-zh">恒升集团</span>
-          </h1>
-          <p class="cover-names">Suzhou Hosun Machine Co., Ltd<br>Suzhou Herstar Medical Technology Co., Ltd</p>
-          <ul class="cover-lines" data-render="taglines"></ul>
-          <div class="cover-actions">
-            <a class="button button-primary" href="#products">See the products</a>
-            <button class="button button-ghost" type="button" data-action="lead">Leave your contact</button>
-          </div>
+      <!-- slide 1 of 恒升介绍英文版.pptx, rebuilt at its own proportions -->
+      <section class="slide-cover" id="top">
+        <div class="slide-logos">
+          <img class="logo-hosun" src="assets/img/cover/hosun.webp" alt="HOSUN 恒升">
+          <img class="logo-herstar" src="assets/img/cover/herstar.webp" alt="HERSTAR 恒而思达">
         </div>
+        <div class="slide-copy">
+          <p class="cover-kicker rising-only">Halloween at the booth <span class="zh">展台万圣节</span></p>
+          <h1 class="slide-title"><span class="slide-title-zh">恒升集团</span><span class="slide-title-en">THE HOSUN GROUP</span></h1>
+          <p class="slide-lines-zh" data-render="taglines-zh"></p>
+          <p class="slide-lines-en" data-render="taglines-en"></p>
+        </div>
+        <img class="slide-company" src="assets/img/cover/company-name.webp" alt="苏州恒而思达医疗科技有限公司 Suzhou Herstar Medical Technology Co., Ltd.">
       </section>
 
       <section class="band" id="profile">
         <div class="band-head">
-          <p class="eyebrow">Group profile</p>
-          <h2>Hosun Group · Herstar <span class="zh">恒升集团 · 恒而思达</span></h2>
+          <p class="eyebrow">About us <span class="zh">公司概况</span></p>
+          <h2>The Hosun Group <span class="zh">恒升集团</span></h2>
         </div>
         <div class="stats" data-render="stats"></div>
-        <div class="story" data-render="story"></div>
-        <div class="divisions" data-render="divisions"></div>
+        <div class="about" data-render="about"></div>
+
+        <div class="sub-head">
+          <h3>Core Business <span class="zh">核心业务</span></h3>
+        </div>
+        <div class="divisions" data-render="core"></div>
+
+        <div class="sub-head">
+          <h3>Business Philosophy <span class="zh">经营理念</span></h3>
+        </div>
+        <div class="creeds" data-render="philosophy"></div>
       </section>
 
       <section class="band band-tint" id="featured">
         <div class="band-head">
-          <p class="eyebrow">Featured at the fair</p>
+          <p class="eyebrow">Featured at the fair <span class="zh">展会重点</span></p>
           <h2>Smart transfer · AI digital imaging <span class="zh">智慧移位 · AI 数字影像</span></h2>
         </div>
         <div class="featured" data-render="featured"></div>
@@ -124,17 +130,17 @@
 
       <section class="band" id="products">
         <div class="band-head">
-          <p class="eyebrow">Herstar product range</p>
-          <h2>Care, mobility and accessible living <span class="zh">康养辅具 · 无障碍生活</span></h2>
+          <p class="eyebrow">Key Products <span class="zh">产品介绍</span></p>
+          <h2>Smart Health &amp; Wellness Products <span class="zh">智慧康养产品</span></h2>
         </div>
-        <div class="chips" role="group" aria-label="Product categories" data-render="filters"></div>
+        <div class="chips" role="group" aria-label="Product categories · 产品分类" data-render="filters"></div>
         <div class="catalogue" data-render="catalogue"></div>
       </section>
 
       <section class="band band-tint" id="factory">
         <div class="band-head">
-          <p class="eyebrow">Manufacturing</p>
-          <h2>Five manufacturing centres, one R&amp;D base <span class="zh">五大制造中心 · 一个研发基地</span></h2>
+          <p class="eyebrow">Manufacturing <span class="zh">制造实力</span></p>
+          <h2>Five manufacturing centers and one R&amp;D base <span class="zh">五大制造中心与一个研发基地</span></h2>
         </div>
         <div class="factories" data-render="factories"></div>
         <div class="strip" data-render="strip"></div>
@@ -142,55 +148,67 @@
 
       <section class="band" id="quality">
         <div class="band-head">
-          <p class="eyebrow">Quality &amp; compliance</p>
-          <h2>Management systems <span class="zh">体系认证</span></h2>
+          <p class="eyebrow">Quality &amp; compliance <span class="zh">质量与合规</span></p>
+          <h2>Certification <span class="zh">体系认证</span></h2>
         </div>
         <div class="certs" data-render="certs"></div>
+        <div class="welding" data-render="welding"></div>
       </section>
 
       <section class="band band-tint" id="partners">
         <div class="band-head">
-          <p class="eyebrow">Customers &amp; partners</p>
-          <h2>Trusted by global brands <span class="zh">合作客户</span></h2>
+          <p class="eyebrow">Customers <span class="zh">合作客户</span></p>
+          <h2>Major Customers <span class="zh">主要客户</span></h2>
         </div>
         <div class="logos" data-render="partners"></div>
       </section>
 
       <section class="band" id="milestones">
         <div class="band-head">
-          <p class="eyebrow">Milestones</p>
-          <h2>From one machine to a health-industry park <span class="zh">发展历程</span></h2>
+          <p class="eyebrow">Milestones <span class="zh">发展历程</span></p>
+          <h2>The Hosun Group Development History <span class="zh">恒升集团发展历程</span></h2>
         </div>
         <ol class="timeline" data-render="timeline"></ol>
-        <figure class="campus">
-          <img src="assets/img/factory/new-campus.webp" alt="Rendering of the new Hosun health-industry campus" loading="lazy">
-          <figcaption>New factory rendering · 新厂规划效果图 — an 80,000 m² digital smart factory, planned to open in 2027.</figcaption>
-        </figure>
+        <div class="campus">
+          <figure style="--ratio: 1.333">
+            <img src="assets/img/factory/new-campus.webp" alt="Aerial rendering of the new factory" loading="lazy" decoding="async">
+          </figure>
+          <figure style="--ratio: 1.626">
+            <img src="assets/img/factory/new-campus-2.webp" alt="Street-level rendering of the new factory" loading="lazy" decoding="async">
+          </figure>
+          <p class="campus-caption">New factory rendering — an 80,000 m² digital smart factory, in operation from 2027.<span class="zh">新厂规划效果图——80,000 平方米数字化智慧工厂，2027 年投产。</span></p>
+        </div>
       </section>
 
       <section class="band band-dark" id="film">
         <div class="band-head">
-          <p class="eyebrow">Brand film</p>
-          <h2>Where the sun rises, Hosun rises <span class="zh">旭日蓬勃，恒升致远</span></h2>
+          <p class="eyebrow">Brand film <span class="zh">品牌影片</span></p>
+          <h2 class="one-line">Where the sun rises, Hosun rises <span class="zh">旭日蓬勃，恒升致远</span></h2>
         </div>
+        <div class="chips film-switch" role="group" aria-label="Film language · 影片语言"></div>
         <div class="film-frame">
-          <video id="film-player" controls playsinline preload="none" poster="assets/img/film/sunrise.webp" aria-label="Hosun Herstar brand film, 2 minutes 48 seconds, Chinese with English subtitles"></video>
+          <video id="film-player" controls playsinline preload="none" poster="assets/img/film/poster.webp" aria-label="Hosun Herstar brand film · 恒而思达品牌影片"></video>
         </div>
       </section>
 
       <section class="band contact" id="contact">
+        <figure class="team">
+          <img src="assets/img/factory/team.webp" alt="The Herstar team" loading="lazy" decoding="async">
+          <figcaption>The Herstar team <span class="zh">恒而思达团队</span></figcaption>
+        </figure>
         <div class="contact-copy">
-          <p class="eyebrow">Contact</p>
+          <p class="eyebrow">Contact <span class="zh">联系方式</span></p>
           <h2>Let’s build what comes next, together <span class="zh">连接合作，共创未来</span></h2>
-          <button class="button button-primary button-large" type="button" data-action="lead">Leave your contact</button>
+          <button class="button button-primary button-large" type="button" data-action="lead">Leave your contact <span class="zh">留下联系方式</span></button>
         </div>
         <dl class="contact-list" data-render="contact"></dl>
+        <div class="social" data-render="social"></div>
       </section>
     </main>
 
     <footer class="site-foot">
-      <p>© 2026 Suzhou Hosun Machine Co., Ltd · Suzhou Herstar Medical Technology Co., Ltd</p>
-      <button class="link-button" type="button" data-action="toggle-rising"><span class="daylight-only">🎃 Halloween mode</span><span class="rising-only">☀ Back to daylight</span></button>
+      <p>© 2026 Suzhou Hosun Machine Co., Ltd · Suzhou Herstar Medical Technology Co., Ltd<span class="zh">苏州市恒升机械有限公司 · 苏州市恒而思达医疗科技有限公司</span></p>
+      <button class="link-button" type="button" data-action="toggle-rising"><span class="daylight-only">🎃 Halloween mode <span class="zh">万圣节模式</span></span><span class="rising-only">☀ Back to daylight <span class="zh">返回日间</span></span></button>
     </footer>
   </div>
 
@@ -350,7 +368,7 @@
     <div class="idle-card">
       <p id="idle-title">Still there? Returning to the showcase in <b id="idle-count">10</b> s.</p>
       <p class="zh">即将返回展示页面</p>
-      <button class="button button-primary" type="button" id="idle-stay">Keep browsing</button>
+      <button class="button button-primary" type="button" id="idle-stay">Keep browsing <span class="zh">继续浏览</span></button>
     </div>
   </dialog>
 
@@ -361,11 +379,12 @@
   <div class="curtain" id="curtain" aria-hidden="true"><p class="curtain-sign">The Rising</p></div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <!-- a squat, round pumpkin: wider than tall, five lobes, a short curled stem -->
     <symbol id="pumpkin" viewBox="0 0 32 32">
-      <path class="pumpkin-stem" d="M16 8.2c-.9-.2-1.5-1-1.5-2.1 0-1.3.8-2.4 2.1-2.9"/>
-      <path class="pumpkin-shell" d="M16 8.2c5.2 0 8.6 4 8.6 9.6S21.2 28.4 16 28.4 7.4 23.4 7.4 17.8 10.8 8.2 16 8.2z"/>
-      <path class="pumpkin-rib" d="M12.2 9.2c-1.5 2.1-2.3 4.9-2.3 8.6s.8 6.5 2.3 8.6M19.8 9.2c1.5 2.1 2.3 4.9 2.3 8.6s-.8 6.5-2.3 8.6"/>
-      <path class="pumpkin-face" d="M12.6 14.3l2.4 4.1h-4.8zM19.4 14.3l2.4 4.1h-4.8zM10.6 21.4h10.8l-1.5 2.9-1.9-1.4-2 1.8-2-1.8-1.9 1.4z"/>
+      <path class="pumpkin-stem" d="M16 9.4c-.2-1.9.3-3.6 1.9-4.9"/>
+      <path class="pumpkin-shell" d="M16 9.6c2.2-1.4 5.6-1.4 8.6.3 3.4 1.9 5.4 5.2 5.4 8.9 0 3.9-2.2 7.2-5.8 8.6-2.4.9-5.6 1.2-8.2 1.2s-5.8-.3-8.2-1.2C4.2 26 2 22.7 2 18.8c0-3.7 2-7 5.4-8.9 3-1.7 6.4-1.7 8.6-.3z"/>
+      <path class="pumpkin-rib" d="M11.4 9.3C9.4 11.8 8.5 15 8.5 18.6s.9 6.8 2.9 9.4M20.6 9.3c2 2.5 2.9 5.7 2.9 9.3s-.9 6.8-2.9 9.4"/>
+      <path class="pumpkin-face" d="M10.2 15.6l2.6 3.6H7.6zM21.8 15.6l2.6 3.6h-5.2zM8.6 21.6h14.8l-1.6 3-2.2-1.4-2.3 1.8-1.3-1.1-1.3 1.1-2.3-1.8-2.2 1.4z"/>
     </symbol>
   </svg>
 

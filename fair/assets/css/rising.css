@@ -54,8 +54,10 @@ body.rising .button-primary { background: var(--ember); color: #1a0b03; box-shad
 body.rising .button-ghost { color: var(--bone); box-shadow: inset 0 0 0 2px rgba(200,255,46,.6), 0 0 18px rgba(200,255,46,.2); }
 body.rising .button-quiet { background: rgba(14, 9, 22, .8); color: var(--bone); box-shadow: inset 0 0 0 1px rgba(168,85,255,.4); }
 body.rising .pumpkin-switch { opacity: 1; }
-body.rising .pumpkin-shell, body.rising .pumpkin-rib, body.rising .pumpkin-stem { stroke: var(--ember); filter: drop-shadow(0 0 3px rgba(255,106,31,.9)); }
-body.rising .pumpkin-face { fill: var(--toxic); filter: drop-shadow(0 0 4px rgba(200,255,46,.95)); animation: lantern-flicker 3.4s ease-in-out infinite; }
+/* by night the pumpkin becomes a neon outline with a lit face */
+body.rising { --pk-body: transparent; --pk-line: var(--ember); --pk-stem: var(--ember); --pk-face: var(--toxic); }
+body.rising .pumpkin-shell, body.rising .pumpkin-rib, body.rising .pumpkin-stem { filter: drop-shadow(0 0 3px rgba(255,106,31,.9)); }
+body.rising .pumpkin-face { filter: drop-shadow(0 0 4px rgba(200,255,46,.95)); animation: lantern-flicker 3.4s ease-in-out infinite; }
 @keyframes lantern-flicker { 0%, 42%, 50%, 76%, 100% { opacity: 1; } 46% { opacity: .5; } 72% { opacity: .78; } }
 
 /* --- the reel -------------------------------------------------------------- */
@@ -75,6 +77,21 @@ body.rising .slogan-zh, body.rising .scene-title h2 .zh { color: #eaffb4; text-s
 body.rising .scene.is-in .slogan-en, body.rising .scene.is-in .scene-cta h2 { animation: sign-on 1.3s steps(1, end) .5s both; }
 @keyframes sign-on { 0% { opacity: 0; } 18% { opacity: 1; } 26% { opacity: .15; } 34% { opacity: 1; } 42% { opacity: .3; } 50% { opacity: 1; } 58% { opacity: .55; } 66% { opacity: 1; } }
 
+/* browsing cover (slide 1) by night */
+body.rising .slide-cover { --slide-ground: transparent; background: var(--cover-ground); }
+body.rising .welding { background: linear-gradient(170deg, rgba(29, 20, 48, .92), rgba(16, 10, 26, .92)); box-shadow: 0 0 0 1px rgba(255,106,31,.3), 0 22px 60px rgba(0,0,0,.5); }
+body.rising .welding-copy h3 { color: #ffd0b2; }
+/* QR codes stay black on white so phones can still read them */
+body.rising .qr { background: #f4efe8; box-shadow: 0 0 0 1px rgba(255,106,31,.3), 0 0 26px rgba(255,106,31,.18); color: #231c2b; }
+body.rising .qr figcaption .zh { color: #5f5767; }
+body.rising .qr figcaption em { color: #c2511a; }
+body.rising .slide-title-zh, body.rising .slide-title-en { color: #fff5ee; text-shadow: 0 0 2px #fff, 0 0 14px rgba(255,106,31,.9), 0 0 40px rgba(255,106,31,.5); }
+body.rising .slide-title-en { border-bottom-color: var(--ember); box-shadow: 0 8px 14px -10px rgba(255,106,31,.9); }
+body.rising .slide-lines-zh { color: var(--bone); }
+body.rising .slide-lines-en { color: #c3b6d6; }
+body.rising .slide-company { filter: invert(1) brightness(1.1); opacity: .85; }
+body.rising .slide-cover .cover-kicker { margin-bottom: 1.4cqw; }
+
 /* cover: the ghost letters become an unlit neon outline */
 body.rising .cover-ghost { -webkit-text-stroke: 2px rgba(168, 85, 255, .35); filter: drop-shadow(0 0 12px rgba(168,85,255,.35)); }
 body.rising .cover-word, body.rising .cover-zh { color: #fff6ef; text-shadow: 0 0 26px rgba(255,106,31,.34), 0 0 70px rgba(168,85,255,.28); }
@@ -84,10 +101,11 @@ body.rising .cover-sign { margin: 0 0 6px; font: 800 clamp(64px, 9vw, 140px)/.9 
 body.rising .cover-lines li { color: #c3b6d6; }
 body.rising .cover-lines li .zh { color: var(--bone); }
 
-body.rising .stat, body.rising .badge, body.rising .logo-tile { border-color: rgba(255,106,31,.45); background: rgba(21, 15, 34, .82); }
+body.rising .stat, body.rising .badge { border-color: rgba(255,106,31,.45); background: rgba(21, 15, 34, .82); }
+/* logos stay on white — lit windows on a dark street, like the product cards */
+body.rising .logo-tile { background: #f4efe8; box-shadow: 0 0 0 1px rgba(255,106,31,.3), 0 0 26px rgba(255,106,31,.18); }
 body.rising .stat { box-shadow: 0 -2px 18px -6px rgba(255,106,31,.8); }
 body.rising .stat-figure { color: #fff5ee; text-shadow: 0 0 2px #fff, 0 0 12px rgba(255,106,31,.9), 0 0 34px rgba(255,106,31,.5); }
-body.rising .logo-ink { background: #d9cbe9; }
 body.rising .year-line { border-color: var(--ember); box-shadow: 0 -4px 16px -6px rgba(255,106,31,.9); }
 body.rising .year-line b { color: #ffd0b2; text-shadow: 0 0 10px rgba(255,106,31,.7); }
 body.rising .year-line li:last-child b { color: var(--toxic); text-shadow: 0 0 12px rgba(200,255,46,.8); }
@@ -126,7 +144,11 @@ body.rising .product-card:hover { box-shadow: 0 0 0 1px rgba(255,106,31,.5), 0 0
 body.rising .product-card .model { color: #c2511a; }
 body.rising .product-card .name-zh { color: #5f5767; }
 body.rising .cert-badge { background: linear-gradient(160deg, #1d1430, #120a1d); box-shadow: inset 0 0 0 1px rgba(168,85,255,.4); }
-body.rising .logos .logo-tile { background: rgba(21, 15, 34, .9); box-shadow: inset 0 0 0 1px rgba(243,236,226,.08); }
+body.rising .logos .logo-tile { background: #f4efe8; }
+body.rising .creed { background: linear-gradient(170deg, rgba(29, 20, 48, .92), rgba(16, 10, 26, .92)); border-top-color: var(--ember); }
+body.rising .creed h3 { color: #ffd0b2; }
+body.rising .product-card .thumb { background: #efe9df; }
+body.rising .year-line span.zh { color: #eaffb4; }
 body.rising .timeline li { border-top-color: var(--ember); }
 body.rising .campus img, body.rising .strip img, body.rising .factory img { filter: brightness(.7) saturate(.7) hue-rotate(-10deg); }
 body.rising .contact { background: var(--cover-ground); }
@@ -176,6 +198,7 @@ body.rising .staff { color: var(--ink); }
 
 /* --- the wandering pumpkin is daylight-only; in the night it would be noise - */
 body.rising .wild-pumpkin { display: none; }
+body.rising .lead-head h2 .zh { color: #ffd0b2; text-shadow: none; }
 
 /* --- the switch: lights cut, the sign flickers on --------------------------- */
 .curtain-sign { margin: 0; font: 800 clamp(64px, 12vw, 180px)/1 "Poppins", sans-serif; letter-spacing: -.04em; color: #fff5ee; opacity: 0; text-shadow: 0 0 2px #fff, 0 0 14px rgba(255,106,31,.95), 0 0 40px rgba(255,106,31,.7), 0 0 90px rgba(255,106,31,.45); }

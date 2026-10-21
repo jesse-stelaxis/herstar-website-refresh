@@ -6,7 +6,7 @@ Sources are the client's raw folder `canton fair/` and the approved
 (1.1 GB). Outputs land in `fair/assets/` and are committed, so the site
 itself never needs this script — run it only when the source material changes.
 
-    python3 -m venv .venv && .venv/bin/pip install Pillow pillow-heif
+    python3 -m venv .venv && .venv/bin/pip install Pillow pillow-heif python-pptx opencv-python-headless
     .venv/bin/python fair/tools/build_assets.py            # skips the film if it exists
     .venv/bin/python fair/tools/build_assets.py --film     # re-encode the film too
     .venv/bin/python fair/tools/build_precache.py          # always run afterwards
@@ -14,7 +14,9 @@ itself never needs this script — run it only when the source material changes.
 Needs `ffmpeg`, `pdfimages` and `pdftocairo` (Homebrew: ffmpeg, poppler).
 """
 import argparse
+import io
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -30,7 +32,8 @@ REPO = Path(__file__).resolve().parents[2]
 SRC = REPO / "canton fair"
 SPREADS = REPO / "HOSUN_spreads_v4.pdf"
 OUT = REPO / "fair" / "assets"
-FILM = SRC / "恒而思达中文版2026.m4v"
+FILM = SRC / "恒而思达中文版2026.m4v"          # stills are taken from this one
+FILMS = {"film-en-1080.mp4": SRC / "恒而思达英文版2026.m4v", "film-zh-1080.mp4": FILM}
 
 # ---- photography: full-bleed slides, 1920 px on the long edge --------------
 PHOTOS = {
@@ -61,10 +64,13 @@ PHOTOS = {
 # ---- stills from the 4K brand film -----------------------------------------
 # (seconds, keep) — `keep` is the share of frame height kept from the top, so
 # the burned-in bilingual subtitles (and the lower-left chapter labels) are cut.
+# `keep` may instead be a (left, top, right, bottom) box in frame fractions.
 FRAMES = {
     "film/sunrise": (4, 0.80),
     "film/home-care": (16, 0.82),
-    "film/rnd": (48, 0.70),
+    # the whole team at the table: the crop stops above the subtitle and the
+    # "研发设计 R&D Design" chapter label is painted out (see unlabel)
+    "film/rnd": (46.6, (0.0, 0.28, 1.0, 0.835)),
     "film/precision": (52, 0.70),
     "film/robot": (56, 0.70),
     "film/assembly": (108, 0.82),
@@ -107,6 +113,9 @@ PRODUCTS = {
     "product/rollator-downhill": P + "助行器/1234 (3).jpg",
     "product/rollator-uphill": P + "助行器/1234 (4).jpg",
     # transfer & lifting
+    "product/transfer-robot": "../1.png",
+    "product/xray-c-arm": "../C-arm-xray.jpg",
+    "product/transfer-device-single": P + "中车移位机器/single.jpg",
     "product/transfer-device": P + "中车移位机器/121.jpg",
     "product/transfer-device-b": P + "中车移位机器/图片_副本.jpg",
     "product/transfer-device-views": P + "中车移位机器/康复助站设备三视图展示.png",
@@ -123,6 +132,7 @@ PRODUCTS = {
     "product/shower-chair": P + "洗澡椅/洗澡1椅 - 副本_副本.png",
     "product/shower-chair-scene": P + "洗澡椅/1234.jpg",
     "product/shower-chair-dims": P + "洗澡椅/Gemini_Generated_Image_2wka212wka212wka_副本.jpg",
+    "product/basin": P + "电动升降洗手台盆/sink.jpg",
     "product/basin-scene": P + "电动升降洗手台盆/1 (1).jpg",
     "product/basin-views": P + "电动升降洗手台盆/1 (2).jpg",
     "product/basin-models": P + "电动升降洗手台盆/1 (3).jpg",
@@ -171,25 +181,46 @@ PRODUCTS = {
     "product/table-overbed": D + "气动1 (5).jpg",
 }
 
-# ---- certificate scans (first page only) -----------------------------------
+# ---- certificate scans ---------------------------------------------------------
+# Folder scans; the English set from slide 7 of 恒升介绍英文版.pptx is in DECK_CERTS.
 CERTS = {
-    "cert/iso-13485": "认证/ISO 13485_01.png",
-    "cert/iso-9001": "认证/ISO 9001_01.png",
-    "cert/iatf-16949": "认证/IATF 16949_01.png",
-    "cert/iso-14001": "认证/ISO 14001_01.png",
+    "cert/iso-13485": "认证/ISO 13485_01.png",   # slide 7's copy expired 2020-12-18; this one runs to 2026-12-18
     "cert/fcc-sdoc": "认证/FCC_01.png",
 }
+DECK = SRC / "物料/恒升介绍英文版.pptx"
+# shape id on slide 7 → output name
+DECK_CERTS = {7: "cert/iatf-16949", 8: "cert/iso-9001", 5: "cert/iso-14001", 6: "cert/iso-45001", 9: "cert/sa8000"}
+# slide 8: the ISO 3834 certificate, then the eight welders' certificates left to right
+DECK_WELDING = {21: "cert/iso-3834", 18: "cert/welder-1", 14: "cert/welder-2", 12: "cert/welder-3", 17: "cert/welder-4",
+                3: "cert/welder-5", 13: "cert/welder-6", 11: "cert/welder-7", 10: "cert/welder-8"}
 
-# ---- partner logos from the approved spread --------------------------------
-# pdfimages index of (image, soft mask or None) on page 1 of HOSUN_spreads_v4.pdf
-PARTNERS = {
-    "daikin": (35, 36), "toyota": (43, 44), "viessmann": (37, 38), "bmw": (39, 40),
-    "zf": (41, 42), "philips": (9, 10), "siemens": (11, 12), "maquet": (13, 14),
-    "carestream": (15, 16), "arjo": (19, None), "paramount-bed": (20, 21),
-    "barco": (17, 18), "vishee": (22, None), "kessebohmer": (23, 24),
-    "dewertokin": (25, 26), "linak": (27, None), "suzhou-health": (28, 29),
-    "genertec": (30, 31), "taikang": (32, None), "hubei-health": (33, 34),
-}
+# ---- partner logos, full colour -------------------------------------------------
+# Order follows slide 6 of the company deck, row by row; logos from the newer
+# `canton fair/logo/` folder join the row of their kind. Sources: a file in that
+# folder, a picture on slide 6 ("deck:<shape id>"), or the spread's Toyota mask
+# recoloured in Toyota red (the deck only has a 151 px copy).
+L = "logo/"
+PARTNERS = [
+    # industrial — Japan, Germany, US
+    ("daikin", L + "Daikin-Logo.png"), ("toyota", "spread-toyota"), ("viessmann", L + "viessmann-logo.svg"),
+    ("bmw", L + "BMW.svg"), ("zf", L + "ZF-Group_Logo_Blue_RGB.png"), ("mitsubishi-electric", L + "Mitsubishi_Electric_logo.svg.png"),
+    ("emerson", L + "Emerson-Electric-Logo.png"), ("assa-abloy", L + "Assa_Abloy.svg.png"), ("wolf", L + "WOLF_Logo.png"),
+    ("aichi", L + "dfytjyb-f563198e-8fe3-4b10-8c37-f3b32aac5b9c.png"), ("fujikoki", L + "fujikoki_czech_s_r_o_cover.jpeg"),
+    # medical imaging and devices
+    ("philips", L + "Phillips-Logo-2008.png"), ("siemens", L + "Siemens_AG_logo.svg.png"), ("maquet", L + "MAQUET_AG_Logo.png"),
+    ("carestream", "deck:37"), ("nuctech", L + "0bfbf27e697240cb863b0234fe15758d.webp"), ("meyer", L + "170468468514657300.svg"),
+    ("perlove", L + "2022090109501942569831071.webp"), ("getein", L + "2021120911073720537.jpg"),
+    # care equipment
+    ("arjo", L + "Arjo_Logotype_Tagline_RGB.jpg"), ("paramount-bed", L + "paramound.png"), ("barco", L + "barco.png"),
+    ("vishee", L + "10069990.jpg"),
+    # lifting systems
+    ("kessebohmer", L + "kesseboehmer_logo.png"), ("dewertokin", L + "logo-dewert-okin.svg"), ("linak", "deck:28"),
+    # health and senior-care groups
+    ("suzhou-health", L + "苏州康养集团logo.png"), ("genertec", L + "logo.png"), ("taikang", L + "1650351975-截屏2022-04-19-下午3.05.58.png"),
+    ("nantong-xinhui", L + "南通鑫汇养老.JPG"),
+    # software
+    ("jbinfo", L + "ae99f18f2c70beb4ac80cc760ff5ad40.png"),
+]
 
 # ---- brand marks, vector, from the two VI manuals --------------------------
 # (pdf, page, viewBox in PDF points measured off a 72 dpi render)
@@ -226,12 +257,32 @@ def build_rasters():
     for name, rel in PHOTOS.items():
         save_webp(fit(load(SRC / rel), 1920), OUT / "img" / f"{name}.webp", 76)
     for name, rel in PRODUCTS.items():
-        save_webp(fit(load(SRC / rel), 1200), OUT / "img" / f"{name}.webp", 80)
-    for name, rel in CERTS.items():
         im = load(SRC / rel)
-        im.thumbnail((1200, 1700), Image.LANCZOS)
-        save_webp(im, OUT / "img" / f"{name}.webp", 74)
-    print(f"rasters: {len(PHOTOS)} photos, {len(PRODUCTS)} products, {len(CERTS)} certificates")
+        # shots on white lose their uneven borders, so every catalogue thumbnail sits the same way
+        corners = im.convert("L").resize((8, 8))
+        if min(corners.getpixel(xy) for xy in ((0, 0), (7, 0), (0, 7), (7, 7))) > 238:
+            im = trim_white(im)
+        save_webp(fit(im, 1200), OUT / "img" / f"{name}.webp", 80)
+    build_certs()
+    build_cover()
+    build_qr()
+    print(f"rasters: {len(PHOTOS)} photos, {len(PRODUCTS)} products")
+
+
+def unlabel(png):
+    """Inpaint the film's white lower-left chapter label (needs opencv-python-headless)."""
+    import cv2
+    import numpy as np
+    im = cv2.imread(str(png))
+    h, w = im.shape[:2]
+    top = int(h * 0.70)
+    band = cv2.cvtColor(im[top:int(h * 0.82), :int(w * 0.35)], cv2.COLOR_BGR2GRAY)
+    ys, xs = np.nonzero(band > 225)
+    x0, x1, y0, y1 = xs.min() - 12, xs.max() + 12, top + ys.min() - 12, top + ys.max() + 12
+    mask = np.zeros((h, w), np.uint8)
+    mask[y0:y1, x0:x1] = (cv2.cvtColor(im[y0:y1, x0:x1], cv2.COLOR_BGR2GRAY) > 175).astype(np.uint8) * 255
+    mask = cv2.dilate(mask, np.ones((7, 7), np.uint8))
+    cv2.imwrite(str(png), cv2.inpaint(im, mask, 6, cv2.INPAINT_NS))
 
 
 def build_frames(tmp):
@@ -239,32 +290,121 @@ def build_frames(tmp):
         raw = tmp / f"{name.replace('/', '-')}.png"
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", str(t), "-i", FILM,
                         "-frames:v", "1", raw], check=True)
+        if name == "film/rnd":
+            unlabel(raw)
         im = Image.open(raw).convert("RGB")
-        im = im.crop((0, 0, im.width, round(im.height * keep)))
+        box = keep if isinstance(keep, tuple) else (0, 0, 1, keep)
+        im = im.crop(tuple(round(v * (im.width if i % 2 == 0 else im.height)) for i, v in enumerate(box)))
         save_webp(fit(im, 1920), OUT / "img" / f"{name}.webp", 78)
-    print(f"film stills: {len(FRAMES)}")
+    # poster for both film players: the HERSTAR logo on a blurred background at 00:31
+    # of the English cut — 31.15 s falls between the end of the subtitle (31.0 s) and a
+    # light flare (31.5 s), so the frame carries no subtitle
+    raw = tmp / "poster.png"
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", "31.15", "-i", FILMS["film-en-1080.mp4"],
+                    "-frames:v", "1", raw], check=True)
+    save_webp(fit(Image.open(raw).convert("RGB"), 1920), OUT / "img" / "film" / "poster.webp", 82)
+    print(f"film stills: {len(FRAMES)} + poster")
+
+
+def deck_pictures(slide_no):
+    """{shape id: image bytes} for every picture on one slide of the company deck."""
+    from pptx import Presentation  # only needed here
+    def walk(shapes):
+        for sh in shapes:
+            yield sh
+            if sh.shape_type == 6:
+                yield from walk(sh.shapes)
+    slide = Presentation(DECK).slides[slide_no - 1]
+    return {sh.shape_id: sh.image.blob for sh in walk(slide.shapes) if sh.shape_type == 13}
+
+
+def trim_white(im, tolerance=14, margin=0.04):
+    """Crop near-white borders, then add an even margin back."""
+    rgb = im.convert("RGB")
+    diff = ImageOps.invert(rgb.convert("L")).point(lambda v: 255 if v > tolerance else 0)
+    box = diff.getbbox()
+    if not box:
+        return im
+    pad = round(max(box[2] - box[0], box[3] - box[1]) * margin)
+    box = (max(box[0] - pad, 0), max(box[1] - pad, 0), min(box[2] + pad, im.width), min(box[3] + pad, im.height))
+    return im.crop(box)
+
+
+def build_certs():
+    for name, rel in CERTS.items():
+        im = load(SRC / rel)
+        im.thumbnail((1200, 1700), Image.LANCZOS)
+        save_webp(im, OUT / "img" / f"{name}.webp", 74)
+    for shape_id, name in DECK_CERTS.items():
+        im = Image.open(io.BytesIO(deck_pictures(7)[shape_id])).convert("RGB")
+        im.thumbnail((1200, 1700), Image.LANCZOS)
+        save_webp(im, OUT / "img" / f"{name}.webp", 78)
+    # slide 8 — ISO 3834-2 and the individual welder certificates, in the slide's order
+    pics = deck_pictures(8)
+    for shape_id, name in DECK_WELDING.items():
+        im = Image.open(io.BytesIO(pics[shape_id])).convert("RGBA")
+        flat = Image.new("RGB", im.size, (255, 255, 255))
+        flat.paste(im, mask=im.getchannel("A"))
+        save_webp(flat, OUT / "img" / f"{name}.webp", 86)
+    print(f"certificates: {len(CERTS)} scans + {len(DECK_CERTS)} from slide 7 + {len(DECK_WELDING)} from slide 8")
+
+
+def build_cover():
+    """Slide 1 of the company deck is the site's cover; its three logo pictures, kept with alpha."""
+    pics = deck_pictures(1)
+    for shape_id, name, width in ((8, "hosun", 760), (9, "herstar", 760), (7, "company-name", 2000)):
+        im = Image.open(io.BytesIO(pics[shape_id])).convert("RGBA")
+        im.thumbnail((width, width), Image.LANCZOS)
+        save_webp(im, OUT / "img" / "cover" / f"{name}.webp", 88)
+    # the cover's background artwork (canton fair/产品/cover.pdf), rendered at iPad Pro width
+    with tempfile.TemporaryDirectory() as tmp:
+        raw = Path(tmp) / "bg"
+        subprocess.run(["pdftocairo", "-png", "-singlefile", "-scale-to-x", "2800", "-scale-to-y", "-1",
+                        SRC / "产品/cover.pdf", raw], check=True)
+        save_webp(Image.open(f"{raw}.png").convert("RGB"), OUT / "img" / "cover" / "background.webp", 88)
+    print("cover: slide 1 logos + background")
+
+
+# slide 18 — the four social-media QR codes, in the slide's order
+DECK_QR = {6: "qr/wechat-official", 8: "qr/wechat-channels", 11: "qr/douyin", 14: "qr/jd"}
+
+
+def build_qr():
+    """QR codes on white (the deck's are dark on transparent), lossless so they stay scannable."""
+    pics = deck_pictures(18)
+    for shape_id, name in DECK_QR.items():
+        im = Image.open(io.BytesIO(pics[shape_id])).convert("RGBA")
+        flat = Image.new("RGB", im.size, (255, 255, 255))
+        flat.paste(im, mask=im.getchannel("A"))
+        dest = OUT / "img" / f"{name}.webp"
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        flat.save(dest, "WEBP", lossless=True)
+    print(f"QR codes: {len(DECK_QR)}")
 
 
 def build_partners(tmp):
-    """Each logo becomes a one-colour alpha mask, so CSS can tint it per skin."""
+    """Full-colour logos on white, trimmed to the mark, for white tiles."""
+    dest_dir = OUT / "logos" / "partners"
+    if dest_dir.exists():
+        shutil.rmtree(dest_dir)
+    dest_dir.mkdir(parents=True)
+    deck = deck_pictures(6)
     subprocess.run(["pdfimages", "-f", "1", "-l", "1", "-png", SPREADS, tmp / "s"], check=True)
-    dest_dir = OUT / "logos"
-    dest_dir.mkdir(parents=True, exist_ok=True)
-    for name, (img_i, mask_i) in PARTNERS.items():
-        art = Image.open(tmp / f"s-{img_i:03d}.png").convert("RGB")
-        alpha = Image.open(tmp / f"s-{mask_i:03d}.png").convert("L") if mask_i is not None else None
-        # composite onto white exactly as the PDF renders it, then read ink as darkness
-        white = Image.new("RGB", art.size, (255, 255, 255))
-        shown = Image.composite(art, white, alpha) if alpha else art
-        ink = ImageOps.invert(shown.convert("L"))
-        top = max(ink.getextrema()[1], 1)  # grey logos stretch to full opacity
-        ink = ink.point(lambda v, top=top: 0 if v < 18 else min(255, round(255 * (v / top) ** 0.7)))
-        box = ink.getbbox()
-        ink = ink.crop(box)
-        ink.thumbnail((640, 180), Image.LANCZOS)
-        mask = Image.new("LA", ink.size, 0)
-        mask.putalpha(ink)
-        mask.save(dest_dir / f"{name}.png", optimize=True)
+    for name, source in PARTNERS:
+        if source.endswith(".svg"):
+            shutil.copy(SRC / source, dest_dir / f"{name}.svg")  # vector, tight viewBox already
+            continue
+        if source == "spread-toyota":
+            shape = Image.open(tmp / "s-044.png").convert("L")
+            im = Image.new("RGB", shape.size, (255, 255, 255))
+            im.paste(Image.new("RGB", shape.size, (235, 10, 30)), mask=shape)
+        elif source.startswith("deck:"):
+            im = load(io.BytesIO(deck[int(source[5:])]))
+        else:
+            im = load(SRC / source)
+        im = trim_white(im, tolerance=24)
+        im.thumbnail((720, 240), Image.LANCZOS)
+        im.save(dest_dir / f"{name}.png", optimize=True)
     print(f"partner logos: {len(PARTNERS)}")
 
 
@@ -312,18 +452,21 @@ def build_icons(tmp):
     print("icons: 3")
 
 
-def build_film():
-    dest = OUT / "video" / "film-1080.mp4"
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    # H.264 high profile, so every tablet browser plays it; capped so the whole
-    # film stays near 60 MB inside the offline cache
-    subprocess.run([
-        "ffmpeg", "-loglevel", "error", "-y", "-i", FILM,
-        "-vf", "scale=1920:-2:flags=lanczos", "-c:v", "libx264", "-preset", "slow",
-        "-crf", "24", "-maxrate", "3000k", "-bufsize", "6000k", "-profile:v", "high",
-        "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", dest,
-    ], check=True)
-    print(f"film: {dest.stat().st_size / 1e6:.1f} MB")
+def build_film(only=None):
+    # H.264 high profile, so every tablet browser plays it; capped so each
+    # version stays near 45 MB inside the offline cache
+    for name, source in FILMS.items():
+        if only and name != only:
+            continue
+        dest = OUT / "video" / name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run([
+            "ffmpeg", "-loglevel", "error", "-y", "-i", source,
+            "-vf", "scale=1920:-2:flags=lanczos", "-c:v", "libx264", "-preset", "slow",
+            "-crf", "24", "-maxrate", "3000k", "-bufsize", "6000k", "-profile:v", "high",
+            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", dest,
+        ], check=True)
+        print(f"film {name}: {dest.stat().st_size / 1e6:.1f} MB")
 
 
 def main():
@@ -331,7 +474,7 @@ def main():
     parser.add_argument("--film", action="store_true", help="re-encode the brand film")
     parser.add_argument("--logos-only", action="store_true", help="rebuild partner logos and brand marks only")
     args = parser.parse_args()
-    missing = [p for p in (SRC, SPREADS, FILM) if not p.exists()]
+    missing = [p for p in (SRC, SPREADS, *FILMS.values()) if not p.exists()]
     if missing:
         sys.exit(f"missing source material: {', '.join(map(str, missing))}")
     with tempfile.TemporaryDirectory() as tmp:
@@ -346,8 +489,9 @@ def main():
         build_partners(tmp)
         build_brand(tmp)
         build_icons(tmp)
-    if args.film or not (OUT / "video" / "film-1080.mp4").exists():
-        build_film()
+    for name in FILMS:
+        if args.film or not (OUT / "video" / name).exists():
+            build_film(only=name)
 
 
 if __name__ == "__main__":

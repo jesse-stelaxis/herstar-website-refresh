@@ -3,16 +3,14 @@
 // from REEL in content.js; this file only knows how to draw each type.
 
 import {
-  REEL, PRODUCTS, STATS, CERTIFICATES, OTHER_SYSTEMS, PARTNERS, PARTNER_LABELS, MILESTONES, FILM, RISING_LINES, COMPANY, img,
+  REEL, PRODUCTS, STATS, CERTIFICATES, WELDING, PARTNERS, MILESTONES, FILM, RISING_LINES, COMPANY, img, en, zh,
 } from './content.js';
+import { esc, bi, specItems, partnerTile, certIsCurrent } from './ui.js';
 import { localUrl } from './offline.js';
 
 const TITLE_SECONDS = 4;
 const rising = () => document.body.classList.contains('rising');
 const byId = Object.fromEntries(PRODUCTS.map((p) => [p.id, p]));
-
-export const certIsCurrent = (cert, today = new Date()) =>
-  !cert.validUntil || new Date(`${cert.validUntil}T23:59:59`) >= today;
 
 const el = (tag, className, html) => {
   const node = document.createElement(tag);
@@ -20,70 +18,63 @@ const el = (tag, className, html) => {
   if (html !== undefined) node.innerHTML = html;
   return node;
 };
-const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 // a chapter becomes its title card followed by one scene per photo
 function playlist() {
   return REEL.flatMap((scene) => scene.type !== 'chapter' ? [scene] : [
     { type: 'title', seconds: TITLE_SECONDS, chapter: scene },
-    ...scene.photos.map(([photo, caption]) => ({ type: 'photo', seconds: scene.seconds, photo, caption, chapter: scene })),
+    ...scene.photos.map(([photo, e, z]) => ({ type: 'photo', seconds: scene.seconds, photo, caption: [e, z], chapter: scene })),
   ]);
 }
 
 const pick = (scene, key) => (rising() && scene.rising?.[key]) || scene[key];
-
-const ROBOT_ICON = '<svg viewBox="0 0 120 120" aria-hidden="true"><rect x="34" y="14" width="52" height="40" rx="12"/><circle cx="50" cy="34" r="5"/><circle cx="70" cy="34" r="5"/><path d="M60 54v12M30 66h60v22H30zM38 88v14M82 88v14M24 102h72M18 76h12M90 76h12"/></svg>';
+const heading = (e, z) => `${esc(e)}<span class="zh">${esc(z)}</span>`;
 
 const BUILD = {
+  // the same slide-1 cover as the browsing site's first page
   cover() {
-    const node = el('div', 'scene scene-cover');
-    node.append(el('div', 'cover-ghost', 'HOSUN'), el('div', 'cover-mark'));
-    const copy = el('div', 'cover-copy');
-    if (rising()) {
-      copy.innerHTML = `
-        <p class="cover-kicker">${esc(RISING_LINES.coverKicker)}</p>
-        <p class="cover-sign neon-ember">${esc(RISING_LINES.cover)}</p>
-        <p class="cover-names">${esc(RISING_LINES.coverSub)}</p>
-        <ul class="cover-lines">${COMPANY.taglines.map(([en, zh]) => `<li>${esc(en)}<span class="zh">${zh}</span></li>`).join('')}</ul>`;
-    } else {
-      copy.innerHTML = `
-        <h1 class="cover-title"><span class="cover-word">HOSUN</span><span class="cover-zh">恒升集团</span></h1>
-        <p class="cover-names">${COMPANY.names.map(esc).join('<br>')}</p>
-        <ul class="cover-lines">${COMPANY.taglines.map(([en, zh]) => `<li><span class="zh">${zh}</span>${esc(en)}</li>`).join('')}</ul>`;
-    }
-    node.append(copy);
-    const herstar = el('img', 'cover-herstar logo-herstar');
-    herstar.src = 'assets/logos/herstar.svg';
-    herstar.alt = '';
-    node.append(herstar);
+    const node = el('div', 'scene slide-cover scene-slide');
+    node.innerHTML = `
+      <div class="slide-logos">
+        <img class="logo-hosun" src="assets/img/cover/hosun.webp" alt="HOSUN 恒升">
+        <img class="logo-herstar" src="assets/img/cover/herstar.webp" alt="HERSTAR 恒而思达">
+      </div>
+      <div class="slide-copy">
+        ${rising() ? `<p class="cover-kicker">${bi(RISING_LINES.coverKicker)}</p>` : ''}
+        <h1 class="slide-title"><span class="slide-title-zh">恒升集团</span><span class="slide-title-en">THE HOSUN GROUP</span></h1>
+        <p class="slide-lines-zh">${COMPANY.taglines.map(([, z]) => `<span>${esc(z)}</span>`).join('')}</p>
+        <p class="slide-lines-en">${COMPANY.taglines.map(([e]) => `<span>${esc(e)}</span>`).join('')}</p>
+      </div>
+      <img class="slide-company" src="assets/img/cover/company-name.webp" alt="苏州恒而思达医疗科技有限公司 Suzhou Herstar Medical Technology Co., Ltd.">`;
     return node;
   },
 
   slogan(scene) {
     const node = el('div', 'scene scene-slogan');
     if (scene.bg) node.append(Object.assign(el('img', 'scene-bg'), { src: img(scene.bg), alt: '' }));
-    node.append(el('div', 'slogan', `<p class="slogan-en">${esc(pick(scene, 'en'))}</p><p class="slogan-zh">${esc(pick(scene, 'zh'))}</p>`));
+    const line = pick(scene, 'line');
+    node.append(el('div', 'slogan', `<p class="slogan-en">${esc(en(line))}</p><p class="slogan-zh">${esc(zh(line))}</p>`));
     return node;
   },
 
   title(scene) {
     const node = el('div', 'scene scene-title');
-    node.append(el('div', 'cover-mark'), el('h2', '', `${esc(pick(scene.chapter, 'theme'))}<span class="zh">${esc(pick(scene.chapter, 'zh'))}</span>`));
+    node.append(el('div', 'cover-mark'), el('h2', '', bi(pick(scene.chapter, 'theme'))));
     return node;
   },
 
   photo(scene) {
     const node = el('div', 'scene scene-photo');
-    node.append(Object.assign(el('img'), { src: img(scene.photo), alt: scene.caption }));
-    node.append(el('div', 'caption', `<p class="caption-theme">${esc(pick(scene.chapter, 'theme'))}</p><p class="caption-text">${esc(scene.caption)}</p>`));
+    node.append(Object.assign(el('img'), { src: img(scene.photo), alt: en(scene.caption) }));
+    node.append(el('div', 'caption', `<p class="caption-theme">${bi(pick(scene.chapter, 'theme'))}</p><p class="caption-text">${bi(scene.caption)}</p>`));
     return node;
   },
 
   stats() {
     const node = el('div', 'scene scene-stats');
     node.append(el('div', 'cover-mark'));
-    node.append(el('h2', '', `Hosun Group at a glance<span class="zh">恒升集团</span>`));
-    node.append(el('div', 'stat-row', STATS.map((s) => `<div class="stat"><span class="stat-figure">${esc(s.figure)}</span><span class="stat-label">${esc(s.label)}<span class="zh">${s.zh}</span></span></div>`).join('')));
+    node.append(el('h2', '', bi(COMPANY.group)));
+    node.append(el('div', 'stat-row', STATS.map((s) => `<div class="stat"><span class="stat-figure">${esc(s.figure)}${s.unit ? `<small>${s.unit}</small>` : ''}</span><span class="stat-label">${bi(s.label)}</span></div>`).join('')));
     return node;
   },
 
@@ -92,48 +83,45 @@ const BUILD = {
     const node = el('div', 'scene scene-spotlight');
     node.append(el('div', 'cover-mark'));
     const photo = p.images[0];
-    const media = el('div', `spot-image${photo ? '' : ' is-empty'}${photo?.startsWith('film/') || photo?.startsWith('factory/') ? ' is-photo' : ''}`);
-    media.innerHTML = photo
-      ? `<img src="${img(photo)}" alt="${esc(p.name)}">`
-      : `<div class="spot-placeholder">${ROBOT_ICON}<p>${esc(p.placeholder)}</p></div>`;
-    const specs = p.specs.slice(0, 8).map(([k, v]) => `<li><b>${esc(k)}</b><span>${esc(v)}</span></li>`).join('');
+    const media = el('div', `spot-image${photo.startsWith('product/') ? '' : ' is-photo'}`);
+    media.innerHTML = `<img src="${img(photo)}" alt="${esc(en(p.name))}">`;
     node.append(media, el('div', 'spot-copy', `
-      <p class="spot-model">${esc(p.model)}</p>
-      <h2>${esc(p.name)}<span class="zh">${p.zh}</span></h2>
-      ${p.lede ? `<p class="spot-lede">${esc(p.lede)}</p>` : ''}
-      <ul class="spec-list">${specs}</ul>`));
+      <p class="spot-model">${bi(p.model)}</p>
+      <h2>${bi(p.name)}</h2>
+      ${p.lede ? `<p class="spot-lede">${esc(en(p.lede))}<span class="zh">${esc(zh(p.lede))}</span></p>` : ''}
+      <ul class="spec-list">${specItems(p.specs, 6)}</ul>`));
     return node;
   },
 
   mosaic(scene) {
     const node = el('div', 'scene scene-mosaic');
-    node.append(el('div', 'cover-mark'), el('h2', '', `${esc(pick(scene, 'title'))}<span class="zh">${esc(pick(scene, 'zh'))}</span>`));
+    node.append(el('div', 'cover-mark'), el('h2', '', bi(pick(scene, 'title'))));
     const items = PRODUCTS.filter((p) => p.cat === scene.category && p.images.length);
-    node.append(el('div', 'mosaic', items.map((p, i) => `<figure style="--i:${i}"><img src="${img(p.images[0])}" alt=""><figcaption>${esc(p.name)}</figcaption></figure>`).join('')));
+    node.append(el('div', 'mosaic', items.map((p, i) => `<figure style="--i:${i}"><img src="${img(p.images[0])}" alt=""><figcaption>${bi(p.name)}</figcaption></figure>`).join('')));
     return node;
   },
 
   certs() {
     const node = el('div', 'scene scene-board');
-    node.append(el('div', 'cover-mark'), el('h2', '', 'Certified management systems<span class="zh">体系认证</span>'));
-    const current = CERTIFICATES.filter((c) => certIsCurrent(c));
+    node.append(el('div', 'cover-mark'), el('h2', '', heading('Certification', '体系认证')));
+    const current = CERTIFICATES.filter((c) => c.image && certIsCurrent(c));
     node.append(el('div', 'cert-fan', current.map((c, i) => `<img style="--i:${i}" src="${img(c.image)}" alt="${esc(c.standard)} certificate">`).join('')));
-    const standards = [...CERTIFICATES.map((c) => c.standard), ...OTHER_SYSTEMS];
+    const standards = [...CERTIFICATES.map((c) => c.standard), ...(WELDING.show ? [WELDING.standard] : [])];
     node.append(el('div', 'badge-row', standards.map((s) => `<span class="badge">${esc(s)}</span>`).join('')));
     return node;
   },
 
   partners() {
-    const node = el('div', 'scene scene-board');
-    node.append(el('div', 'cover-mark'), el('h2', '', 'Trusted by global brands<span class="zh">合作客户</span>'));
-    node.append(el('div', 'logo-wall', PARTNERS.map((p, i) => `<div class="logo-tile" style="--i:${i}"><div class="logo-ink" role="img" aria-label="${esc(PARTNER_LABELS[p.id])}" style="--logo:url('${new URL(p.src, document.baseURI).href}')"></div>${p.text ? `<span class="logo-text">${p.text}</span>` : ''}</div>`).join('')));
+    const node = el('div', 'scene scene-board scene-partners');
+    node.append(el('div', 'cover-mark'), el('h2', '', heading('Major Customers', '主要客户')));
+    node.append(el('div', 'logo-wall', PARTNERS.map((p, i) => partnerTile(p, i)).join('')));
     return node;
   },
 
   timeline() {
     const node = el('div', 'scene scene-board');
-    node.append(el('div', 'cover-mark'), el('h2', '', 'Twenty-five years of rising<span class="zh">发展历程</span>'));
-    node.append(el('ol', 'year-line', MILESTONES.map(([y, t], i) => `<li style="--i:${i}"><b>${y}</b><span>${esc(t)}</span></li>`).join('')));
+    node.append(el('div', 'cover-mark'), el('h2', '', heading('The Hosun Group Development History', '发展历程')));
+    node.append(el('ol', 'year-line', MILESTONES.map(([y, e, z], i) => `<li style="--i:${i}"><b>${y}</b><span>${esc(e)}</span><span class="zh">${esc(z)}</span></li>`).join('')));
     return node;
   },
 
@@ -141,11 +129,13 @@ const BUILD = {
     const node = el('div', 'scene scene-cta');
     node.append(el('div', 'cover-mark'));
     const night = rising();
+    const title = night ? RISING_LINES.cta : ['Let’s build what comes next, together.', '连接合作，共创未来'];
+    const body = night ? RISING_LINES.ctaSub : ['Leave your details on this tablet and our team will follow up after the fair — in your language.', '在这台平板上留下您的联系方式，展会结束后我们的团队会用您的语言与您联系。'];
     node.append(
-      el('h2', '', esc(night ? RISING_LINES.cta : 'Let’s build what comes next, together.')),
-      el('p', 'zh-line', night ? '不给糖就捣蛋？留下名片吧' : '连接合作，共创未来'),
-      el('p', '', esc(night ? RISING_LINES.ctaSub : 'Leave your details on this tablet and our team will follow up after the fair — in your language.')),
-      el('button', 'button button-primary button-large', 'Leave your contact'),
+      el('h2', '', esc(en(title))),
+      el('p', 'zh-line', esc(zh(title))),
+      el('p', 'cta-body', bi(body)),
+      el('button', 'button button-primary button-large', 'Leave your contact <span class="zh">留下联系方式</span>'),
     );
     Object.assign(node.querySelector('button'), { type: 'button' }).dataset.action = 'lead';
     return node;
@@ -174,7 +164,7 @@ export function createReel({ stage, chapterEl, liftEl }) {
 
   const setChapter = (scene) => {
     const chapter = scene.chapter;
-    chapterEl.innerHTML = chapter ? `${esc(pick(chapter, 'theme'))}<span class="zh">${esc(pick(chapter, 'zh'))}</span>` : '';
+    chapterEl.innerHTML = chapter ? bi(pick(chapter, 'theme')) : '';
   };
 
   const runLift = (seconds) => {
@@ -193,7 +183,7 @@ export function createReel({ stage, chapterEl, liftEl }) {
   async function startFilm(node, seconds) {
     const video = node.querySelector('video');
     const [from, to] = FILM.segments[filmPass++ % FILM.segments.length];
-    video.src = await localUrl(FILM.src);
+    video.src = await localUrl(FILM.versions[FILM.default].src);
     video.currentTime = from;
     video.addEventListener('timeupdate', () => { if (video.currentTime >= to) video.pause(); });
     try { await video.play(); } catch { /* autoplay refused — the poster still shows */ }

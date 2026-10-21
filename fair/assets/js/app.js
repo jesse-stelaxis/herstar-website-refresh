@@ -129,20 +129,21 @@ async function boot() {
   await registerWorker();
   const result = await prepareOffline(({ done, total, bytes, totalBytes }) => {
     bar.style.width = `${Math.round((bytes / Math.max(totalBytes, 1)) * 100)}%`;
-    count.textContent = `${done} of ${total} files · ${(bytes / 1e6).toFixed(0)} of ${(totalBytes / 1e6).toFixed(0)} MB`;
+    const mb = `${(bytes / 1e6).toFixed(0)} / ${(totalBytes / 1e6).toFixed(0)} MB`;
+    count.innerHTML = `${done} of ${total} files · ${mb}<span class="zh">已保存 ${done} / ${total} 个文件 · ${mb}</span>`;
   });
   clearTimeout(skipLater);
 
   if (result.unsupported) {
-    count.textContent = 'This browser cannot keep an offline copy here — open the page over https.';
+    count.innerHTML = 'This browser cannot keep an offline copy here — open the page over https.<span class="zh">此浏览器无法在此保存离线副本，请通过 https 打开。</span>';
     skip.hidden = false;
     setTimeout(start, 4000);
     return;
   }
   if (!result.ok) {
-    count.textContent = result.missing === Infinity
-      ? 'No connection, and nothing saved on this tablet yet. Connect to Wi-Fi once to prepare the showcase.'
-      : `${result.missing} files could not be saved. They will be retried the next time the page opens online.`;
+    count.innerHTML = result.missing === Infinity
+      ? 'No connection, and nothing saved on this tablet yet. Connect to Wi-Fi once to prepare the showcase.<span class="zh">无网络连接，本平板尚未保存内容。请先连接一次 Wi-Fi 以完成准备。</span>'
+      : `${result.missing} files could not be saved. They will be retried the next time the page opens online.<span class="zh">${result.missing} 个文件未能保存，下次联网打开时将自动重试。</span>`;
     skip.hidden = false;
     return;
   }
@@ -152,7 +153,7 @@ async function boot() {
     location.reload();
     return;
   }
-  count.textContent = 'Everything is saved on this tablet.';
+  count.innerHTML = 'Everything is saved on this tablet.<span class="zh">所有内容已保存在本平板。</span>';
   bar.style.width = '100%';
   setTimeout(start, 600);
 }
