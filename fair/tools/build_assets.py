@@ -333,7 +333,7 @@ def trim_white(im, tolerance=14, margin=0.04):
 def build_certs():
     for name, rel in CERTS.items():
         im = load(SRC / rel)
-        im.thumbnail((1200, 1700), Image.LANCZOS)
+        im.thumbnail((1600, 2260), Image.LANCZOS)  # sharp when the viewer fills a tablet screen
         save_webp(im, OUT / "img" / f"{name}.webp", 74)
     for shape_id, name in DECK_CERTS.items():
         im = Image.open(io.BytesIO(deck_pictures(7)[shape_id])).convert("RGB")

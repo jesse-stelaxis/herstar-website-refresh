@@ -1,5 +1,5 @@
 {
- "version": "b4c95334e59b",
+ "version": "2f53e9910618",
  "files": [
   {
    "url": "index.html",
@@ -7,7 +7,7 @@
   },
   {
    "url": "assets/css/fair.css",
-   "bytes": 54880
+   "bytes": 55162
   },
   {
    "url": "assets/css/fonts.css",
@@ -79,7 +79,7 @@
   },
   {
    "url": "assets/img/cert/fcc-sdoc.webp",
-   "bytes": 171728
+   "bytes": 233604
   },
   {
    "url": "assets/img/cert/iatf-16949.webp",
@@ -87,7 +87,7 @@
   },
   {
    "url": "assets/img/cert/iso-13485.webp",
-   "bytes": 94106
+   "bytes": 134970
   },
   {
    "url": "assets/img/cert/iso-14001.webp",
@@ -695,7 +695,7 @@
   },
   {
    "url": "assets/js/site.js",
-   "bytes": 15384
+   "bytes": 15331
   },
   {
    "url": "assets/js/staff.js",

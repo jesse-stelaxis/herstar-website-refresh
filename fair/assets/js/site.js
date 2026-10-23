@@ -86,8 +86,7 @@ function renderStatic() {
   slot('certs').innerHTML = CERTIFICATES.map((c) => {
     const head = `<h3>${esc(c.standard)}</h3><p>${bi(c.scope)}</p>`;
     if (c.image && certIsCurrent(c, today)) {
-      return `<button class="cert" type="button" data-cert="${c.id}"><img src="${img(c.image)}" alt="${esc(c.standard)} certificate" loading="lazy" decoding="async">${head}
-        <p class="cert-meta">${esc(c.body)}${c.validUntil ? ` · valid to ${c.validUntil} <span class="zh">有效期至 ${c.validUntil}</span>` : ''}</p></button>`;
+      return `<button class="cert" type="button" data-cert="${c.id}"><img src="${img(c.image)}" alt="${esc(c.standard)} certificate" loading="lazy" decoding="async">${head}</button>`;
     }
     // past its printed expiry: show the standard, not an out-of-date scan
     return `<div class="cert"><div class="cert-badge"><strong>${esc(c.standard)}</strong><small>Current certificate available from our team on request<span class="zh">最新证书可向工作人员索取</span></small></div>${head}</div>`;
@@ -171,6 +170,7 @@ const certSheet = document.getElementById('cert-sheet');
 function openCert(id, imageId) {
   const c = CERTIFICATES.find((x) => x.id === id);
   const image = document.getElementById('cert-image');
+  image.onload = () => image.style.setProperty('--ratio', image.naturalWidth / image.naturalHeight);
   image.src = img(imageId ?? c.image);
   image.alt = c ? `${c.standard} certificate` : 'Certificate';
   certSheet.showModal();
