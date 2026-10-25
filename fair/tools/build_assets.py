@@ -217,7 +217,7 @@ PARTNERS = [
     ("kessebohmer", L + "kesseboehmer_logo.png"), ("dewertokin", L + "logo-dewert-okin.svg"), ("linak", "deck:28"),
     # health and senior-care groups
     ("suzhou-health", L + "苏州康养集团logo.png"), ("genertec", L + "logo.png"), ("taikang", L + "1650351975-截屏2022-04-19-下午3.05.58.png"),
-    ("nantong-xinhui", L + "南通鑫汇养老.JPG"),
+    # 南通鑫汇养老 left out on request, like Hubei
     # software
     ("jbinfo", L + "ae99f18f2c70beb4ac80cc760ff5ad40.png"),
 ]

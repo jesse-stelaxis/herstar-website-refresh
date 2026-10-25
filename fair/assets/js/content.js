@@ -177,7 +177,7 @@ export const PARTNERS = [
   ['arjo', 'Arjo', 'png'], ['paramount-bed', 'Paramount Bed', 'png'], ['barco', 'Barco', 'png'], ['vishee', 'Vishee 伟思', 'png'],
   ['kessebohmer', 'Kesseböhmer', 'png'], ['dewertokin', 'Dewert Okin', 'svg'], ['linak', 'Linak', 'png'],
   ['suzhou-health', 'Suzhou Health & Senior Care Group 苏州康养集团', 'png'], ['genertec', 'Genertec Universal Medical 通用技术环球医疗', 'png'],
-  ['taikang', 'Taikang 泰康', 'png'], ['nantong-xinhui', '南通鑫汇养老 Nantong Xinhui Senior Care', 'png', '南通鑫汇养老'],
+  ['taikang', 'Taikang 泰康', 'png'],
   ['jbinfo', 'JBINFO 青鸟软通', 'png'],
 ].map(([id, label, ext, text]) => ({ id, label, src: `assets/logos/partners/${id}.${ext}`, text: text ?? '' }));
 

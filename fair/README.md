@@ -36,7 +36,7 @@ Two looks:
 - Product copy comes from 广交会资料.xls, the spec sheets and the product .docx files.
 - Customer logos are full colour, from slide 6 and `canton fair/logo/`, ordered as on slide 6
   with the newer logos joining the row of their kind (industrial, medical imaging, care
-  equipment, lifting systems, care groups). Hubei Health and Elderly Care Group is left out.
+  equipment, lifting systems, care groups). Hubei Health and Elderly Care Group and 南通鑫汇养老 are left out.
 
 ## Run it locally
 

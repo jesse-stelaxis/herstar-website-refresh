@@ -1,5 +1,5 @@
 {
- "version": "2f53e9910618",
+ "version": "c525791bdfe4",
  "files": [
   {
    "url": "index.html",
@@ -663,7 +663,7 @@
   },
   {
    "url": "assets/js/content.js",
-   "bytes": 46555
+   "bytes": 46457
   },
   {
    "url": "assets/js/db.js",
@@ -800,10 +800,6 @@
   {
    "url": "assets/logos/partners/mitsubishi-electric.png",
    "bytes": 28920
-  },
-  {
-   "url": "assets/logos/partners/nantong-xinhui.png",
-   "bytes": 41084
   },
   {
    "url": "assets/logos/partners/nuctech.png",
