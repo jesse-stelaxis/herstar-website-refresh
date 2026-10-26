@@ -84,7 +84,7 @@ function renderStatic() {
 
   const today = new Date();
   slot('certs').innerHTML = CERTIFICATES.map((c) => {
-    const head = `<h3>${esc(c.standard)}</h3><p>${bi(c.scope)}</p>`;
+    const head = `<h3>${esc(c.standard)}</h3>`; // the standard only — no scope line beneath
     if (c.image && certIsCurrent(c, today)) {
       return `<button class="cert" type="button" data-cert="${c.id}"><img src="${img(c.image)}" alt="${esc(c.standard)} certificate" loading="lazy" decoding="async">${head}</button>`;
     }
@@ -107,7 +107,7 @@ function renderStatic() {
   slot('timeline').innerHTML = MILESTONES.map(([y, e, z]) => `<li><b>${y}</b><strong>${esc(e)}</strong><span class="zh">${esc(z)}</span></li>`).join('');
   slot('contact').innerHTML = `
     <div><dt>Companies <span class="zh">公司</span></dt>${COMPANY.names.map((n, i) => `<dd>${esc(n)}<span class="zh">${COMPANY.namesZh[i]}</span></dd>`).join('')}</div>
-    <div><dt>Telephone <span class="zh">电话</span></dt><dd dir="ltr">${COMPANY.phone}</dd><dd dir="ltr">${COMPANY.mobile}</dd></div>
+    <div><dt>Telephone <span class="zh">电话</span></dt>${COMPANY.phones.map((n) => `<dd dir="ltr">${n}</dd>`).join('')}</div>
     <div><dt>Email <span class="zh">邮箱</span></dt>${COMPANY.emails.map((e) => `<dd>${e}</dd>`).join('')}</div>
     <div><dt>Website <span class="zh">网站</span></dt>${COMPANY.webs.map((w) => `<dd>${w}</dd>`).join('')}</div>
     <div><dt>Address <span class="zh">地址</span></dt><dd>${bi(COMPANY.address)}</dd></div>`;

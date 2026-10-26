@@ -610,6 +610,11 @@ body[data-mode="reel"] { user-select: none; -webkit-user-select: none; }
 
 .site-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 26px var(--gutter) max(26px, env(safe-area-inset-bottom)); background: var(--ink); color: rgba(255, 255, 255, .7); font-size: 14px; }
 .site-foot p { margin: 0; }
+.site-foot p .zh { margin-left: 8px; }
+.site-foot .beian { flex-basis: 100%; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, .12); text-align: center; font-size: 13px; }
+.beian a { display: inline-flex; align-items: center; gap: 6px; color: rgba(255, 255, 255, .7); text-decoration: none; }
+.beian a:hover { color: #fff; text-decoration: underline; }
+.beian img { width: 16px; height: 16px; }
 
 /* ===========================================================================
    DIALOGS — product sheet, certificate, lead form, staff, idle

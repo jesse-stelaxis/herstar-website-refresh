@@ -21,8 +21,7 @@ export const COMPANY = {
     ['World-class CDMO platform for manufacturing medical devices', '世界级品牌医疗器械 CDMO 代工平台'],
     ['Pioneer in developing intelligent healthcare facilities and equipment in China', '中国智慧康养设施设备领航缔造者'],
   ],
-  phone: '0512-66259867',
-  mobile: '13451558549',
+  phones: ['0512-66259867', '13506132528', '13862091917'],
   emails: ['Herstar@hosun.cn', 'Lusia@hosun.cn'],
   webs: ['www.hosunherstar.com', 'www.hosun.cn'],
   address: ['No. 37 Yaonan Road, Hengjing, Wuzhong Economic Development Zone, Suzhou, Jiangsu, China', '中国江苏省苏州市吴中区经济开发区横泾尧南路37号'],
@@ -132,7 +131,7 @@ export const MILESTONES = [
   ['2027', 'New Health and Wellness Industrial Park put into Operation', '新工厂投产'],
 ];
 
-// slide 7 — Certification, in the deck's order. Scans are the deck's English
+// slide 7 — Certification, in the deck's order except that ISO 45001 sits before ISO 13485. Scans are the deck's English
 // set, except ISO 13485 (the deck's copy expired in 2020; the folder scan runs
 // to 2026-12-18). `validUntil` hides a scan once its printed expiry passes.
 export const CERTIFICATES = [
@@ -142,10 +141,10 @@ export const CERTIFICATES = [
     scope: ['Manufacturing of metal stamping parts; manufacturing and assembly of mechanical parts', '金属冲压件的制造、机械零部件的制造和装配'] },
   { id: 'iso-14001', standard: 'ISO 14001:2015', body: 'CQC · IQNet', image: 'cert/iso-14001', validUntil: '2029-09-27',
     scope: ['General machine manufacture and related management activities', '一般机械加工及相关管理活动'] },
-  { id: 'iso-13485', standard: 'ISO 13485:2016', body: 'BSI', image: 'cert/iso-13485', validUntil: '2026-12-18',
-    scope: ['Manufacture of metal parts for medical devices', '医疗器械金属零部件制造'] },
   { id: 'iso-45001', standard: 'ISO 45001:2018', body: 'CQC · IQNet', image: 'cert/iso-45001', validUntil: '2028-12-01',
     scope: ['Lifting tables (electric lifting systems), medical equipment parts, home-appliance stampings and related management activities', '升降桌（电动升降系统）、医疗设备零部件、家电冲压件的生产及相关管理活动'] },
+  { id: 'iso-13485', standard: 'ISO 13485:2016', body: 'BSI', image: 'cert/iso-13485', validUntil: '2026-12-18',
+    scope: ['Manufacture of metal parts for medical devices', '医疗器械金属零部件制造'] },
   { id: 'sa8000', standard: 'SA8000:2014', body: 'IQNet · CQC', image: 'cert/sa8000', validUntil: '2028-09-22',
     scope: ['Social responsibility management system', '社会责任管理体系'] },
   { id: 'fcc-sdoc', standard: 'FCC SDoC', body: 'BCTC', image: 'cert/fcc-sdoc', validUntil: null,

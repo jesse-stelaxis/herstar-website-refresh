@@ -1,13 +1,13 @@
 {
- "version": "c525791bdfe4",
+ "version": "bcf533577658",
  "files": [
   {
    "url": "index.html",
-   "bytes": 20513
+   "bytes": 20883
   },
   {
    "url": "assets/css/fair.css",
-   "bytes": 55162
+   "bytes": 55568
   },
   {
    "url": "assets/css/fonts.css",
@@ -64,6 +64,10 @@
   {
    "url": "assets/fonts/poppins-800-latin.woff2",
    "bytes": 7816
+  },
+  {
+   "url": "assets/icons/beian-badge.png",
+   "bytes": 19256
   },
   {
    "url": "assets/icons/icon-180.png",
@@ -663,7 +667,7 @@
   },
   {
    "url": "assets/js/content.js",
-   "bytes": 46457
+   "bytes": 46509
   },
   {
    "url": "assets/js/db.js",
@@ -695,7 +699,7 @@
   },
   {
    "url": "assets/js/site.js",
-   "bytes": 15331
+   "bytes": 15350
   },
   {
    "url": "assets/js/staff.js",
