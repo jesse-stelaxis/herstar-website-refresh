@@ -50,11 +50,18 @@ stepping through scenes. The service worker (offline copy) only works over `http
 
 ## Put it on the tablet
 
-It is published with the other sites by `.github/workflows/pages.yml` at `<pages-url>/fair/`.
+It is the only site published by `.github/workflows/pages.yml`, at the root of
+**https://cf.hosun.cn/** (GitHub Pages, custom domain set in the repository's Pages settings;
+DNS: `cf` CNAME `jesse-stelaxis.github.io` at the hosun.cn registrar). `b2b/`, `b2c/` and
+`demo/` are not deployed for now.
+
+GitHub Pages can be slow or unreliable from mainland China. The kiosk only needs one
+complete load per tablet — do it before travelling or on a reliable connection, then it runs
+from its offline copy.
 
 **iPad (recommended)**
 
-1. On good Wi-Fi, open the `/fair/` URL in Safari and wait for *“Everything is saved on this
+1. On good Wi-Fi, open **https://cf.hosun.cn/** in Safari and wait for *“Everything is saved on this
    tablet.”* (~102 MB, most of it the two films).
 2. Share → **Add to Home Screen**. Open it from the Home Screen icon — it runs full screen,
    and Safari protects a Home Screen app's storage from automatic clean-up. **The Home Screen

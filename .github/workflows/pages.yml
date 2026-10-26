@@ -1,4 +1,4 @@
-name: Deploy Herstar sites to GitHub Pages
+name: Deploy the Canton Fair kiosk to GitHub Pages (cf.hosun.cn)
 
 on:
   push:
@@ -30,23 +30,19 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
-      - name: Assemble B2B, B2C and client demo
+      # Only the Canton Fair kiosk is published, at the root of cf.hosun.cn.
+      # b2b/, b2c/ and demo/ stay in the repository but are not deployed yet;
+      # to bring one back, copy it into _site/ here (it will appear under the
+      # same domain). The custom domain is set in the repository's Pages
+      # settings — with an Actions deploy, a CNAME file in _site/ is ignored.
+      - name: Assemble the Canton Fair kiosk
         run: |
-          mkdir -p _site/b2c _site/demo _site/demo/operations
-          cp -R b2b/. _site/
-          cp -R b2c/. _site/b2c/
-          cp demo/*.html demo/*.css demo/*.js _site/demo/
-          cp -R demo/assets demo/vendor _site/demo/
-          cp demo/功能交付清单.md _site/demo/
-          cp demo/operations/*.html demo/operations/*.css demo/operations/*.js demo/operations/*.mjs _site/demo/operations/
-          cp demo/operations/README.md _site/demo/operations/
-          cp 客户价值与设计说明.md 流量采购待办计划.md _site/
-          mkdir -p _site/fair
-          cp -R fair/. _site/fair/
-          rm -rf _site/fair/tools
+          mkdir -p _site
+          cp -R fair/. _site/
+          rm -rf _site/tools _site/README.md
           find _site -name .DS_Store -delete
 
-      - name: Upload Herstar sites
+      - name: Upload the kiosk
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./_site
